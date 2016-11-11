@@ -1,4 +1,4 @@
-# Caravel
+# Superset
 
 Docker image for [AirBnB's Superset](https://github.com/airbnb/superset).
 
