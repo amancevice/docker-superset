@@ -105,7 +105,7 @@ docker rm -f superset-old
 docker run --detach --name superset-new ...
 
 # Upgrade the DB
-docker exec superset-new db upgrade
+docker exec superset-new superset db upgrade
 ```
 
 
