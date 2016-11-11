@@ -42,7 +42,7 @@ docker run --detach --name superset \
     --env SECRET_KEY="mySUPERsecretKEY" \
     --env SQLALCHEMY_DATABASE_URI="sqlite:////home/superset/.superset/superset.db" \
     --publish 8088:8088 \
-    --volume ~/superset:/home/superset/db \
+    --volume ~/superset:/home/superset/.superset \
     amancevice/superset
 ```
 
