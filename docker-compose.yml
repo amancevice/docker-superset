@@ -1,0 +1,35 @@
+version: '2'
+services:
+  redis:
+    image: redis:alpine
+    restart: always
+    volumes:
+      - redis:/data
+  mysql:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: superset
+      MYSQL_DATABASE: superset
+      MYSQL_USER: superset
+      MYSQL_PASSWORD: superset
+    volumes:
+      - mysql:/var/lib/mysql
+  superset:
+    build: .
+    image: amancevice/superset
+    restart: always
+    depends_on:
+      - mysql
+      - redis
+    environment:
+      SECRET_KEY: thisISaSECRET_1234
+      SQLALCHEMY_DATABASE_URI: mysql://superset:superset@mysql:3306/superset
+      CACHE_CONFIG: "{\"CACHE_TYPE\": \"redis\", \"CACHE_DEFAULT_TIMEOUT\": 300, \"CACHE_KEY_PREFIX\": \"caravel_\", \"CACHE_REDIS_HOST\": \"redis\", \"CACHE_REDIS_PORT\": 6379, \"CACHE_REDIS_DB\": 1, \"CACHE_REDIS_URL\": \"redis://redis:6379/1\"}"
+    ports:
+      - "8888:8088"
+volumes:
+  mysql:
+    external: false
+  redis:
+    external: false

@@ -10,8 +10,8 @@ Docker image for [AirBnB's Superset](https://github.com/airbnb/superset).
 Run the superset demo by entering this command into your console:
 
 ```bash
-docker run --name superset -d -p 8088:8088 amancevice/superset
-docker exec -it superset demo
+docker-compose up -d
+docker-compose exec superset demo
 ```
 
 You will be prompted to set up an admin user.
