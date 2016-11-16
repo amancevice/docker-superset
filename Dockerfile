@@ -2,7 +2,7 @@ FROM amancevice/pandas:0.18.1-python3
 MAINTAINER smallweirdnum@gmail.com
 
 # Install
-ENV SUPERSET_VERSION 0.13.1
+ENV SUPERSET_VERSION 0.13.2
 RUN apk add --no-cache \
         curl \
         libffi-dev \
