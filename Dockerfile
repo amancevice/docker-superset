@@ -12,6 +12,7 @@ RUN apk add --no-cache \
     pip3 install \
         superset==$SUPERSET_VERSION \
         mysqlclient==1.3.7 \
+        ldap3==2.1.1 \
         psycopg2==2.6.1 \
         redis==2.10.5 \
         sqlalchemy-redshift==0.5.0
