@@ -1,5 +1,4 @@
 FROM amancevice/pandas:0.18.1-python3
-MAINTAINER smallweirdnum@gmail.com
 
 # Install
 ENV SUPERSET_VERSION 0.14.1
