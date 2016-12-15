@@ -20,16 +20,13 @@ RUN apk add --no-cache \
 ENV LANG=C.UTF-8 \
     LC_ALL=C.UTF-8 \
     PATH=$PATH:/home/superset/.bin \
-    PYTHONPATH=/home/superset/superset_config.py:$PYTHONPATH \
-    SQLALCHEMY_DATABASE_URI=sqlite:////home/superset/.superset/superset.db
+    PYTHONPATH=/home/superset/superset_config.py:$PYTHONPATH
 
 # Run as superset user
 WORKDIR /home/superset
 COPY superset .
 RUN addgroup superset && \
     adduser -h /home/superset -G superset -D superset && \
-    mkdir /home/superset/.superset && \
-    touch /home/superset/.superset/superset.db && \
     chown -R superset:superset /home/superset
 USER superset
 
