@@ -1,7 +1,7 @@
 FROM amancevice/pandas:0.18.1-python3
 
 # Install
-ENV SUPERSET_VERSION 0.15.0
+ENV SUPERSET_VERSION 0.15.1
 RUN apk add --no-cache \
         curl \
         libffi-dev \
@@ -34,4 +34,4 @@ USER superset
 EXPOSE 8088
 HEALTHCHECK CMD ["curl", "-f", "http://localhost:8088/health"]
 ENTRYPOINT ["superset"]
-CMD ["runserver", "--address", "0.0.0.0"]
+CMD ["runserver"]
