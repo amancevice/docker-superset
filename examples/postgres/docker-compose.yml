@@ -5,31 +5,29 @@ services:
     restart: always
     volumes:
       - redis:/data
-  mysql:
-    image: mysql:5.7
+  postgres:
+    image: postgres:9.6
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: superset
-      MYSQL_DATABASE: superset
-      MYSQL_USER: superset
-      MYSQL_PASSWORD: superset
+      POSTGRES_DB: superset
+      POSTGRES_PASSWORD: superset
+      POSTGRES_USER: superset
     volumes:
-      - mysql:/var/lib/mysql
+      - postgres:/var/lib/postgresql/data
   superset:
-    build: .
     image: amancevice/superset
     restart: always
     depends_on:
-      - mysql
+      - postgres
       - redis
     environment:
       MAPBOX_API_KEY: ${MAPBOX_API_KEY}
     ports:
       - "8088:8088"
     volumes:
-      - "./superset_config.py:/home/superset/superset_config.py"
+      - ./superset_config.py:/home/superset/superset_config.py
 volumes:
-  mysql:
+  postgres:
     external: false
   redis:
     external: false
