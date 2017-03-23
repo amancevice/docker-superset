@@ -5,25 +5,9 @@ Docker image for [AirBnB's Superset](https://github.com/airbnb/superset).
 *Formerly [Caravel](https://github.com/amancevice/caravel)*
 
 
-## Demo
+## Examples
 
-Run the superset demo by entering this command into your console:
-
-```bash
-git clone git@github.com:amancevice/superset.git
-cd superset
-docker-compose up -d redis mysql
-# Wait for MySQL to come online...
-docker-compose up -d superset
-# Wait for Superset to come online...
-docker-compose exec superset demo
-```
-
-You will be prompted to set up an admin user.
-
-When finished navigate to [http://localhost:8088/](http://localhost:8088/) to see the demo.
-
-Log in with the credentials you just created.
+Navigate to the [`examples`](./examples) directory to view examples of how to configure Superset with MySQL, PostgreSQL, or SQLite.
 
 
 ## Versions

@@ -1,0 +1,22 @@
+version: '2'
+services:
+  redis:
+    image: redis:alpine
+    restart: always
+    volumes:
+      - redis:/data
+  superset:
+    image: amancevice/superset
+    restart: always
+    depends_on:
+      - redis
+    environment:
+      MAPBOX_API_KEY: ${MAPBOX_API_KEY}
+    ports:
+      - "8088:8088"
+    volumes:
+      - ./superset.db:/home/superset/.superset/superset.db
+      - ./superset_config.py:/home/superset/superset_config.py
+volumes:
+  redis:
+    external: false
