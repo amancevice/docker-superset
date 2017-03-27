@@ -14,7 +14,10 @@ RUN apk add --no-cache \
         ldap3==2.1.1 \
         psycopg2==2.6.1 \
         redis==2.10.5 \
-        sqlalchemy-redshift==0.5.0
+        sqlalchemy-redshift==0.5.0 \
+        flask-oauth==0.12 \
+        flask_oauthlib==0.9.3 \
+        flask-mail==0.9.1
 
 # Default config
 ENV LANG=C.UTF-8 \
