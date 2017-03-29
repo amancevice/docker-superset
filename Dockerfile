@@ -1,7 +1,7 @@
 FROM amancevice/pandas:0.18.1-python3
 
 # Install
-ENV SUPERSET_VERSION 0.17.1
+ENV SUPERSET_VERSION 0.17.2
 RUN apk add --no-cache \
         curl \
         libffi-dev \
