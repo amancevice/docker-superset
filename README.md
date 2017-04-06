@@ -12,14 +12,14 @@ Navigate to the [`examples`](./examples) directory to view examples of how to co
 
 ## Versions
 
-This repo is tagged in parallel with superset. Pulling `amancevice/superset:0.13.1` will fetch the image of this repository running superset version `0.13.1`. It is possible that the `latest` tag includes new features/support libraries but will usually be in sync with the latest semantic version.
+This repo is tagged in parallel with superset. Pulling `amancevice/superset:0.17.3` will fetch the image of this repository running superset version `0.17.3`. It is possible that the `latest` tag includes new features/support libraries but will usually be in sync with the latest semantic version.
 
 
 ## Configuration
 
-As of `0.15.0` I have removed the default `superset_config.py` file that is laid down. Users who wish to override the defaults should review the [configuration](https://github.com/airbnb/superset/blob/master/superset/config.py) provided by AirBnB, determine which values to override, and mount this file to `/home/superset/superset_config.py`.
+Follow the [instructions](http://airbnb.io/superset/installation.html#configuration) provided by AirBnB for writing your own `superset_config.py`. Place this file in a local directory and mount this directory to `/home/superset/.superset` inside the container. This location is included in the image's `PYTHONPATH`. Mounting this file to a different location is possible, but it will need to be in the `PYTHONPATH`.
 
-A very simple example is available for reference at [`./superset_config.py`](./superset_config.py) (which is used by the demo docker-compose file).
+View the contents of the [`examples`](./examples) directory to see some simple `superset_config.py` samples.
 
 
 ## Database Initialization
