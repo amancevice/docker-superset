@@ -14,11 +14,11 @@ cd $1
 
 # Start back end
 if [ "$1" == "sqlite" ]; then
-  echo "Starting Redis service..."
+  echo "Starting redis service..."
   docker-compose up -d redis
-  touch superset.db
+  >| ./.superset/superset.db
 else
-  echo "Starting Redis & $1 services..."
+  echo "Starting redis & $1 services..."
   docker-compose up -d redis $1
   echo "Sleeping for 30s"
   sleep 30
@@ -34,6 +34,6 @@ sleep 30
 docker-compose exec superset demo
 
 echo "Navigate to http://localhost:8088 to view demo"
-echo "This demo will say up for 5m and will then be brought down"
-sleep 300
+echo -n "Press any key to bring down demo"
+read down
 docker-compose down -v

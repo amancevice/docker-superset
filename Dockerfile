@@ -1,7 +1,13 @@
 FROM amancevice/pandas:0.18.1-python3
 
-# Install
-ENV SUPERSET_VERSION 0.17.3
+# Configure environment
+ENV LANG=C.UTF-8 \
+    LC_ALL=C.UTF-8 \
+    PATH=$PATH:/home/superset/.bin \
+    PYTHONPATH=/home/superset/.superset:$PYTHONPATH \
+    SUPERSET_VERSION=0.17.3
+
+# Install dependencies & create superset user
 RUN apk add --no-cache \
         curl \
         libffi-dev \
@@ -17,24 +23,19 @@ RUN apk add --no-cache \
         sqlalchemy-redshift==0.5.0 \
         flask-oauth==0.12 \
         flask_oauthlib==0.9.3 \
-        flask-mail==0.9.1
-
-# Default config
-ENV LANG=C.UTF-8 \
-    LC_ALL=C.UTF-8 \
-    PATH=$PATH:/home/superset/.bin \
-    PYTHONPATH=/home/superset/superset_config.py:$PYTHONPATH
-
-# Run as superset user
-WORKDIR /home/superset
-COPY superset .
-RUN addgroup superset && \
+        flask-mail==0.9.1 && \
+    addgroup superset && \
     adduser -h /home/superset -G superset -D superset && \
     chown -R superset:superset /home/superset
-USER superset
 
-# Deploy
+# Configure Filesysten
+WORKDIR /home/superset
+COPY superset .
+VOLUME /home/superset/.superset
+
+# Deploy application
 EXPOSE 8088
 HEALTHCHECK CMD ["curl", "-f", "http://localhost:8088/health"]
 ENTRYPOINT ["superset"]
 CMD ["runserver"]
+USER superset

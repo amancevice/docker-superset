@@ -15,8 +15,7 @@ services:
     ports:
       - "8088:8088"
     volumes:
-      - ./superset.db:/home/superset/.superset/superset.db
-      - ./superset_config.py:/home/superset/superset_config.py
+      - ./.superset:/home/superset/.superset
 volumes:
   redis:
     external: false
