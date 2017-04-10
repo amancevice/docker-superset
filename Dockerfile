@@ -23,7 +23,8 @@ RUN apk add --no-cache \
         sqlalchemy-redshift==0.5.0 \
         flask-oauth==0.12 \
         flask_oauthlib==0.9.3 \
-        flask-mail==0.9.1 && \
+        flask-mail==0.9.1 \
+        pyhive==0.2.1 && \
     addgroup superset && \
     adduser -h /home/superset -G superset -D superset && \
     chown -R superset:superset /home/superset
