@@ -27,6 +27,8 @@ RUN apk add --no-cache \
         pyhive==0.2.1 && \
     addgroup superset && \
     adduser -h /home/superset -G superset -D superset && \
+    mkdir /home/superset/.superset && \
+    touch /home/superset/.superset/superset.db && \
     chown -R superset:superset /home/superset
 
 # Configure Filesysten
