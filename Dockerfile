@@ -10,21 +10,22 @@ ENV LANG=C.UTF-8 \
 # Install dependencies & create superset user
 RUN apk add --no-cache \
         curl \
-        libffi-dev \
         cyrus-sasl-dev \
+        libffi-dev \
         mariadb-dev \
+        openldap-dev \
         postgresql-dev && \
     pip3 install \
-        superset==$SUPERSET_VERSION \
-        mysqlclient==1.3.7 \
-        ldap3==2.1.1 \
-        psycopg2==2.6.1 \
-        redis==2.10.5 \
-        sqlalchemy-redshift==0.5.0 \
+        flask-mail==0.9.1 \
         flask-oauth==0.12 \
         flask_oauthlib==0.9.3 \
-        flask-mail==0.9.1 \
-        pyhive==0.2.1 && \
+        mysqlclient==1.3.7 \
+        psycopg2==2.6.1 \
+        pyhive==0.2.1 \
+        pyldap==2.4.28 \
+        redis==2.10.5 \
+        sqlalchemy-redshift==0.5.0 \
+        superset==$SUPERSET_VERSION && \
     addgroup superset && \
     adduser -h /home/superset -G superset -D superset && \
     mkdir /home/superset/.superset && \
