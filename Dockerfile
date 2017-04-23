@@ -5,7 +5,7 @@ ENV LANG=C.UTF-8 \
     LC_ALL=C.UTF-8 \
     PATH=$PATH:/home/superset/.bin \
     PYTHONPATH=/home/superset/.superset:$PYTHONPATH \
-    SUPERSET_VERSION=0.17.4
+    SUPERSET_VERSION=0.17.5
 
 # Install dependencies & create superset user
 RUN apk add --no-cache \
