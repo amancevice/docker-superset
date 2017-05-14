@@ -1,11 +1,11 @@
-FROM amancevice/pandas:0.18.1-python3
+FROM amancevice/pandas:0.19.2-python3
 
 # Configure environment
 ENV LANG=C.UTF-8 \
     LC_ALL=C.UTF-8 \
     PATH=$PATH:/home/superset/.bin \
     PYTHONPATH=/home/superset/.superset:$PYTHONPATH \
-    SUPERSET_VERSION=0.17.6
+    SUPERSET_VERSION=0.18.0
 
 # Install dependencies & create superset user
 RUN apk add --no-cache \
