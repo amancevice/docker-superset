@@ -19,6 +19,7 @@ RUN apk add --no-cache \
         flask-mail==0.9.1 \
         flask-oauth==0.12 \
         flask_oauthlib==0.9.3 \
+        impyla==0.14.0 \
         mysqlclient==1.3.7 \
         psycopg2==2.6.1 \
         pyhive==0.2.1 \
