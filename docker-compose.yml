@@ -1,0 +1,8 @@
+version: '3'
+services:
+  superset:
+    build:
+      context: .
+      args:
+        SUPERSET_VERSION: 0.18.4
+    image: amancevice/superset

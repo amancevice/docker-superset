@@ -1,21 +1,24 @@
 FROM amancevice/pandas:0.19.2-python3
 
+# Superset version
+ARG SUPERSET_VERSION
+
 # Configure environment
 ENV LANG=C.UTF-8 \
     LC_ALL=C.UTF-8 \
     PATH=$PATH:/home/superset/.bin \
     PYTHONPATH=/home/superset/.superset:$PYTHONPATH \
-    SUPERSET_VERSION=0.18.4
+    SUPERSET_VERSION=${SUPERSET_VERSION:-0.18.4}
 
 # Install dependencies & create superset user
-RUN apk add --no-cache \
-        curl \
-        cyrus-sasl-dev \
-        libffi-dev \
-        mariadb-dev \
-        openldap-dev \
-        postgresql-dev && \
-    pip3 install \
+RUN apt-get update && \
+    apt-get install -y \
+        build-essential \
+        libsasl2-dev \
+        libldap2-dev \
+        mariadb-client \
+        postgresql-client && \
+    pip install \
         flask-mail==0.9.1 \
         flask-oauth==0.12 \
         flask_oauthlib==0.9.3 \
@@ -28,8 +31,7 @@ RUN apk add --no-cache \
         sqlalchemy-redshift==0.5.0 \
         sqlalchemy-clickhouse==0.1.1.post3 \
         superset==$SUPERSET_VERSION && \
-    addgroup superset && \
-    adduser -h /home/superset -G superset -D superset && \
+    useradd -b /home -U -m superset && \
     mkdir /home/superset/.superset && \
     touch /home/superset/.superset/superset.db && \
     chown -R superset:superset /home/superset
