@@ -8,7 +8,7 @@ ENV LANG=C.UTF-8 \
     LC_ALL=C.UTF-8 \
     PATH=$PATH:/home/superset/.bin \
     PYTHONPATH=/home/superset/.superset:$PYTHONPATH \
-    SUPERSET_VERSION=${SUPERSET_VERSION:-0.18.4}
+    SUPERSET_VERSION=${SUPERSET_VERSION:-0.18.5}
 
 # Install dependencies & create superset user
 RUN apt-get update && \
