@@ -4,5 +4,5 @@ services:
     build:
       context: .
       args:
-        SUPERSET_VERSION: 0.18.4
+        SUPERSET_VERSION: 0.18.5
     image: amancevice/superset
