@@ -1,8 +1,6 @@
 # Superset
 
-Docker image for [AirBnB's Superset](https://github.com/airbnb/superset).
-
-*Formerly [Caravel](https://github.com/amancevice/caravel)*
+Docker image for [Superset](https://github.com/ApacheInfra/superset).
 
 
 ## Examples
@@ -12,7 +10,7 @@ Navigate to the [`examples`](./examples) directory to view examples of how to co
 
 ## Versions
 
-This repo is tagged in parallel with superset. Pulling `amancevice/superset:0.17.3` will fetch the image of this repository running superset version `0.17.3`. It is possible that the `latest` tag includes new features/support libraries but will usually be in sync with the latest semantic version.
+This repo is tagged in parallel with superset. Pulling `amancevice/superset:0.18.5` will fetch the image of this repository running superset version `0.18.5`. It is possible that the `latest` tag includes new features/support libraries but will usually be in sync with the latest semantic version.
 
 
 ## Configuration
