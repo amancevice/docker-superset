@@ -17,7 +17,7 @@ This repo is tagged in parallel with superset. Pulling `amancevice/superset:0.17
 
 ## Configuration
 
-Follow the [instructions](https://superset.incubator.apache.org/installation.html#configuration) provided by Apache SuperSet for writing your own `superset_config.py`. Place this file in a local directory and mount this directory to `/home/superset/.superset` inside the container. This location is included in the image's `PYTHONPATH`. Mounting this file to a different location is possible, but it will need to be in the `PYTHONPATH`.
+Follow the [instructions](https://superset.incubator.apache.org/installation.html#configuration) provided by Apache Superset for writing your own `superset_config.py`. Place this file in a local directory and mount this directory to `/home/superset/.superset` inside the container. This location is included in the image's `PYTHONPATH`. Mounting this file to a different location is possible, but it will need to be in the `PYTHONPATH`.
 
 View the contents of the [`examples`](./examples) directory to see some simple `superset_config.py` samples.
 
