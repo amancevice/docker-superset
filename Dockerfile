@@ -1,14 +1,14 @@
 FROM amancevice/pandas:0.19.2-python3
 
 # Superset version
-ARG SUPERSET_VERSION
+ARG SUPERSET_VERSION=0.18.5
 
 # Configure environment
 ENV LANG=C.UTF-8 \
     LC_ALL=C.UTF-8 \
     PATH=$PATH:/home/superset/.bin \
     PYTHONPATH=/home/superset/.superset:$PYTHONPATH \
-    SUPERSET_VERSION=${SUPERSET_VERSION:-0.18.5}
+    SUPERSET_VERSION=${SUPERSET_VERSION}
 
 # Install dependencies & create superset user
 RUN apt-get update && \
