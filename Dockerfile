@@ -1,4 +1,4 @@
-FROM amancevice/pandas:0.19.2-python3
+FROM amancevice/pandas:0.20.2-python3
 
 # Superset version
 ARG SUPERSET_VERSION=0.18.5
@@ -6,9 +6,13 @@ ARG SUPERSET_VERSION=0.18.5
 # Configure environment
 ENV LANG=C.UTF-8 \
     LC_ALL=C.UTF-8 \
-    PATH=$PATH:/home/superset/.bin \
-    PYTHONPATH=/home/superset/.superset:$PYTHONPATH \
+    PYTHONPATH=/etc/superset:$PYTHONPATH \
     SUPERSET_VERSION=${SUPERSET_VERSION}
+
+# Configure Filesysten
+COPY superset /usr/local/bin
+VOLUME /etc/superset
+WORKDIR /home/superset
 
 # Install dependencies & create superset user
 RUN apt-get update && \
@@ -31,15 +35,11 @@ RUN apt-get update && \
         sqlalchemy-redshift==0.5.0 \
         sqlalchemy-clickhouse==0.1.1.post3 \
         superset==$SUPERSET_VERSION && \
-    useradd -b /home -U -m superset && \
+    useradd -U superset && \
     mkdir /home/superset/.superset && \
     touch /home/superset/.superset/superset.db && \
+    chown root:staff /usr/local/bin/superset-* && \
     chown -R superset:superset /home/superset
-
-# Configure Filesysten
-WORKDIR /home/superset
-COPY superset .
-VOLUME /home/superset/.superset
 
 # Deploy application
 EXPOSE 8088
