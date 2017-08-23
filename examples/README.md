@@ -48,7 +48,7 @@ docker-compose down -v
 ```bash
 cd postgres
 
-# Start Redis & MySQL services
+# Start Redis & PostgreSQL services
 docker-compose up -d redis postgres
 # Wait for services to come up fully...
 
