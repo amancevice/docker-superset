@@ -1,7 +1,7 @@
 FROM amancevice/pandas:0.20.2-python3
 
 # Superset version
-ARG SUPERSET_VERSION=0.19.0
+ARG SUPERSET_VERSION=0.19.1
 
 # Configure environment
 ENV LANG=C.UTF-8 \
