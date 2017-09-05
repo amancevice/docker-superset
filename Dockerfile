@@ -29,7 +29,7 @@ RUN apt-get update && \
         impyla==0.14.0 \
         mysqlclient==1.3.7 \
         psycopg2==2.6.1 \
-        pyhive==0.2.1 \
+        pyhive==0.5.0 \
         pyldap==2.4.28 \
         redis==2.10.5 \
         sqlalchemy-redshift==0.5.0 \
