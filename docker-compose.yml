@@ -6,6 +6,8 @@ services:
       args:
         SUPERSET_VERSION: 0.19.1
     image: amancevice/superset
+    ports:
+      - 8088:8088
   superset-0.19.1:
     build:
       context: .
