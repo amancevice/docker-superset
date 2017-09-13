@@ -15,7 +15,10 @@ VOLUME /etc/superset
 WORKDIR /home/superset
 
 # Install dependencies & create superset user
-RUN apt-get update && \
+RUN  echo "deb http://http.debian.net/debian jessie-backports main" | tee /etc/apt/sources.list.d/webupd8team-java.list && \
+    echo "deb-src http://http.debian.net/debian jessie-backports main" | tee -a /etc/apt/sources.list.d/webupd8team-java.list && \
+    apt-get update && \
+    apt-get install -y -t jessie-backports openjdk-8-jdk && \
     apt-get install -y \
         build-essential \
         libsasl2-dev \
@@ -29,12 +32,13 @@ RUN apt-get update && \
         impyla==0.14.0 \
         mysqlclient==1.3.7 \
         psycopg2==2.6.1 \
+        PyAthenaJDBC \
         pyhive==0.5.0 \
         pyldap==2.4.28 \
         redis==2.10.5 \
         sqlalchemy-redshift==0.5.0 \
         sqlalchemy-clickhouse==0.1.1.post3 \
-        superset==$SUPERSET_VERSION && \
+        superset==$SUPERSET_VERSION && \    
     useradd -U superset && \
     mkdir /home/superset/.superset && \
     touch /home/superset/.superset/superset.db && \
