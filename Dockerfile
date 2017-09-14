@@ -32,13 +32,13 @@ RUN  echo "deb http://http.debian.net/debian jessie-backports main" | tee /etc/a
         impyla==0.14.0 \
         mysqlclient==1.3.7 \
         psycopg2==2.6.1 \
-        PyAthenaJDBC \
+        PyAthenaJDBC==1.2.0 \
         pyhive==0.5.0 \
         pyldap==2.4.28 \
         redis==2.10.5 \
         sqlalchemy-redshift==0.5.0 \
         sqlalchemy-clickhouse==0.1.1.post3 \
-        superset==$SUPERSET_VERSION && \    
+        superset==$SUPERSET_VERSION && \
     useradd -U superset && \
     mkdir /home/superset/.superset && \
     touch /home/superset/.superset/superset.db && \
