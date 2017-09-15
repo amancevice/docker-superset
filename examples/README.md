@@ -34,7 +34,7 @@ docker-compose up -d superset
 # Wait for Superset to come up fully...
 
 # Inititalize Superset DB
-docker-compose exec superset demo
+docker-compose exec superset superset-demo
 # or `docker-compose exec superset superset-init` if no demo data needed
 
 # Play around in demo...
@@ -57,7 +57,7 @@ docker-compose up -d superset
 # Wait for Superset to come up fully...
 
 # Inititalize demo
-docker-compose exec superset demo
+docker-compose exec superset superset-demo
 # or `docker-compose exec superset superset-init` if no demo data needed
 
 # Play around in demo...
@@ -83,7 +83,7 @@ docker-compose up -d superset
 # Wait for Superset to come up fully...
 
 # Inititalize demo
-docker-compose exec superset demo
+docker-compose exec superset superset-demo
 # or `docker-compose exec superset superset-init` if no demo data needed
 
 # Play around in demo...
