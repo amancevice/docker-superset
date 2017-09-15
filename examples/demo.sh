@@ -16,7 +16,6 @@ cd $1
 if [ "$1" == "sqlite" ]; then
   echo "Starting redis service..."
   docker-compose up -d redis
-  >| ./superset/superset.db
 else
   echo "Starting redis & $1 services..."
   docker-compose up -d redis $1

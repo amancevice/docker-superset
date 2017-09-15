@@ -14,8 +14,6 @@ services:
       MAPBOX_API_KEY: ${MAPBOX_API_KEY}
     ports:
       - "8088:8088"
-    volumes:
-      - ./superset:/etc/superset
 volumes:
   redis:
     external: false

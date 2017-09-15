@@ -34,7 +34,7 @@ docker-compose up -d superset
 # Wait for Superset to come up fully...
 
 # Inititalize Superset DB
-docker-compose exec superset demo
+docker-compose exec superset superset-demo
 # or `docker-compose exec superset superset-init` if no demo data needed
 
 # Play around in demo...
@@ -57,7 +57,7 @@ docker-compose up -d superset
 # Wait for Superset to come up fully...
 
 # Inititalize demo
-docker-compose exec superset demo
+docker-compose exec superset superset-demo
 # or `docker-compose exec superset superset-init` if no demo data needed
 
 # Play around in demo...
@@ -75,15 +75,12 @@ cd sqlite
 docker-compose up -d redis
 # Wait for services to come up fully...
 
-# Touch SQLite db file
-touch superset.db
-
 # Start Superset
 docker-compose up -d superset
 # Wait for Superset to come up fully...
 
 # Inititalize demo
-docker-compose exec superset demo
+docker-compose exec superset superset-demo
 # or `docker-compose exec superset superset-init` if no demo data needed
 
 # Play around in demo...
