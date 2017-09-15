@@ -30,7 +30,7 @@ echo "Sleeping for 30s"
 sleep 30
 
 # Inititalize Demo
-docker-compose exec superset superset-demo
+docker-compose exec superset superset-demo ${@:2:($#-1)}
 
 echo "Navigate to http://localhost:8088 to view demo"
 echo -n "Press RETURN to bring down demo"
