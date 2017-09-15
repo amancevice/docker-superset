@@ -13,6 +13,8 @@ services:
       MYSQL_DATABASE: superset
       MYSQL_USER: superset
       MYSQL_PASSWORD: superset
+    ports:
+      - "3306:3306"
     volumes:
       - mysql:/var/lib/mysql
   superset:
