@@ -1,4 +1,4 @@
-FROM amancevice/pandas:0.20.2-python3
+FROM python:3.6-stretch
 
 # Superset version
 ARG SUPERSET_VERSION=0.19.1
