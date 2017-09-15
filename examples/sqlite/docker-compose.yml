@@ -12,6 +12,7 @@ services:
       - redis
     environment:
       MAPBOX_API_KEY: ${MAPBOX_API_KEY}
+      SUPERSET_HOME: /etc/superset
     ports:
       - "8088:8088"
     volumes:

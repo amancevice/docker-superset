@@ -7,10 +7,12 @@ ARG SUPERSET_VERSION=0.19.1
 ENV LANG=C.UTF-8 \
     LC_ALL=C.UTF-8 \
     PYTHONPATH=/etc/superset:$PYTHONPATH \
-    SUPERSET_VERSION=${SUPERSET_VERSION}
+    SUPERSET_VERSION=${SUPERSET_VERSION} \
+    SUPERSET_HOME=/home/superset
 
-# Install dependencies & create superset user
-RUN apt-get update && \
+# Create superset user & install dependencies
+RUN useradd -U -m superset && \
+    apt-get update && \
     apt-get install -y \
         build-essential \
         default-libmysqlclient-dev \
@@ -34,10 +36,7 @@ RUN apt-get update && \
         redis==2.10.5 \
         sqlalchemy-redshift==0.5.0 \
         sqlalchemy-clickhouse==0.1.1.post3 \
-        superset==${SUPERSET_VERSION} && \
-    useradd -U -m superset && \
-    mkdir /home/superset/.superset && \
-    touch /home/superset/.superset/superset.db
+        superset==${SUPERSET_VERSION}
 
 # Configure Filesystem
 COPY superset /usr/local/bin
