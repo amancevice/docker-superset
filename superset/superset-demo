@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Initialize Caravel
-superset-init
+superset-init $@
 
 # Load some data to play with
 superset load_examples
