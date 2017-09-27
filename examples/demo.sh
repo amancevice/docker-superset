@@ -3,10 +3,10 @@
 set -e
 
 if [ -z $1 ]; then
-  echo "Usage: bash demo.sh mysql|postgres|sqlite"
+  echo "Usage: bash demo.sh mysql|postgres|sqlite|celery"
   exit 1
-elif [ "$1" != "mysql" ] && [ "$1" != "postgres" ] && [ "$1" != "sqlite" ]; then
-  echo "Usage: bash demo.sh mysql|postgres|sqlite"
+elif [ "$1" != "mysql" ] && [ "$1" != "postgres" ] && [ "$1" != "sqlite" ] && [ "$1" != "celery" ]; then
+  echo "Usage: bash demo.sh mysql|postgres|sqlite|celery"
   exit 1
 fi
 
@@ -17,9 +17,14 @@ if [ "$1" == "sqlite" ]; then
   echo "Starting redis service..."
   docker-compose up -d redis
   >| ./superset/superset.db
-else
+elif [ "$1" == "mysql" ] || [ "$1" == "postgres" ]; then
   echo "Starting redis & $1 services..."
   docker-compose up -d redis $1
+  echo "Sleeping for 30s"
+  sleep 30
+else
+  echo "Starting redis & postgres services..."
+  docker-compose up -d redis postgres
   echo "Sleeping for 30s"
   sleep 30
 fi
@@ -29,6 +34,11 @@ echo "Starting Superset..."
 docker-compose up -d superset
 echo "Sleeping for 30s"
 sleep 30
+
+if [ "$1" == "celery" ]; then
+  echo "Starting celery worker service..."
+  docker-compose up -d worker
+fi
 
 # Inititalize Demo
 docker-compose exec superset superset-demo

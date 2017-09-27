@@ -1,13 +1,13 @@
 # Superset Examples
 
-Example configurations for MySQL, PostgreSQL, and SQLite are provided, along with a simple demo script for starting them.
+Example configurations for MySQL, PostgreSQL, SQLite, and Celery are provided, along with a simple demo script for starting them.
 
 Each demo provides a `superset_config.py` and a `docker-compose.yml`. Use these as guides for laying down your own instances.
 
-Start a demo of Superset using the `demo.sh` script. The script takes a single argument that determines the back end for Superset: `sqlite`, `mysql`, or `postgres`.
+Start a demo of Superset using the `demo.sh` script. The script takes a single argument that determines the back end for Superset: `sqlite`, `mysql`, `postgres`, or `celery`.
 
 ```bash
-bash demo.sh mysql|postgres|sqlite
+bash demo.sh mysql|postgres|sqlite|celery
 ```
 
 You will be prompted to set up an admin user.
@@ -33,7 +33,7 @@ docker-compose up -d redis mysql
 docker-compose up -d superset
 # Wait for Superset to come up fully...
 
-# Inititalize Superset DB
+# Initialize Superset DB
 docker-compose exec superset superset-demo
 # or `docker-compose exec superset superset-init` if no demo data needed
 
@@ -56,7 +56,7 @@ docker-compose up -d redis postgres
 docker-compose up -d superset
 # Wait for Superset to come up fully...
 
-# Inititalize demo
+# Initialize demo
 docker-compose exec superset superset-demo
 # or `docker-compose exec superset superset-init` if no demo data needed
 
@@ -82,7 +82,33 @@ touch superset.db
 docker-compose up -d superset
 # Wait for Superset to come up fully...
 
-# Inititalize demo
+# Initialize demo
+docker-compose exec superset superset-demo
+# or `docker-compose exec superset superset-init` if no demo data needed
+
+# Play around in demo...
+
+# Bring everything down
+docker-compose down -v
+```
+
+## Celery
+
+```bash
+cd celery
+
+# Start Redis & PostgreSQL services
+docker-compose up -d redis postgres
+# Wait for services to come up fully...
+
+# Start Superset
+docker-compose up -d superset
+# Wait for Superset to come up fully...
+
+# Start Celery worker
+docker-compose up -d worker
+
+# Initialize demo
 docker-compose exec superset superset-demo
 # or `docker-compose exec superset superset-init` if no demo data needed
 
