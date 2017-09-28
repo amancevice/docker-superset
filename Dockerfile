@@ -15,6 +15,7 @@ RUN useradd -U -m superset && \
     apt-get update && \
     apt-get install -y \
         build-essential \
+        curl \
         default-libmysqlclient-dev \
         libldap2-dev \
         libpq-dev \
