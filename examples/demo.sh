@@ -32,13 +32,12 @@ fi
 # Start Superset
 echo "Starting Superset..."
 docker-compose up -d superset
-echo "Sleeping for 30s"
-sleep 30
-
 if [ "$1" == "celery" ]; then
-  echo "Starting celery worker service..."
+  echo "Starting Superset worker..."
   docker-compose up -d worker
 fi
+echo "Sleeping for 30s"
+sleep 30
 
 # Inititalize Demo
 docker-compose exec superset superset-demo
