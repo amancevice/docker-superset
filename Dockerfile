@@ -37,6 +37,7 @@ RUN useradd -U -m superset && \
         redis==2.10.5 \
         sqlalchemy-redshift==0.5.0 \
         sqlalchemy-clickhouse==0.1.1.post3 \
+        Werkzeug==0.12.1 \
         superset==${SUPERSET_VERSION}
 
 # Configure Filesystem
