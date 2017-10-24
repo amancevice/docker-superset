@@ -1,0 +1,93 @@
+{
+    "family": "superset",
+    "containerDefinitions": [
+        {
+            "name": "superset",
+            "image": "amancevice/superset",
+            "cpu": 10,
+            "memory": 500,
+            "links": [
+              "mysql",
+              "redis"
+            ],
+            "essential": true,
+            "portMappings": [
+              {
+                "containerPort": 8088,
+                "hostPort": 8088
+              }
+            ],
+            "mountPoints": [
+              {
+                "containerPath": "/etc/superset",
+                "sourceVolume": "superset"
+              }
+            ]
+        },
+        {
+            "name": "redis",
+            "image": "redis",
+            "cpu": 10,
+            "memory": 500,
+            "essential": true,
+            "mountPoints": [
+              {
+                "containerPath": "/data",
+                "sourceVolume": "redis"
+              }
+            ]
+        },
+        {
+          "name": "mysql",
+          "image": "mysql",
+          "cpu": 10,
+          "memory": 500,
+          "essential": true,
+          "environment": [
+            {
+              "name": "MYSQL_ROOT_PASSWORD",
+              "value": "superset"
+            },
+            {
+              "name": "MYSQL_DATABASE",
+              "value": "superset"
+            },
+            {
+              "name": "MYSQL_USER",
+              "value": "superset"
+            },
+            {
+              "name": "MYSQL_PASSWORD",
+              "value": "superset"
+            }
+
+          ],
+          "mountPoints": [
+            {
+              "containerPath": "/var/lib/mysql/",
+              "sourceVolume": "db"
+            }
+          ]
+        }
+    ],
+    "volumes": [
+        {
+          "name": "db",
+          "host": {
+            "sourcePath": "/data/db"
+          }
+        },
+        {
+          "name": "redis",
+          "host": {
+            "sourcePath": "/data/redis"
+          }
+        },
+        {
+          "name": "superset",
+          "host": {
+            "sourcePath": "/data/superset"
+          }
+        }
+    ]
+}

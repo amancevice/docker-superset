@@ -47,3 +47,16 @@ docker run --detach --name superset-new [options] amancevice/superset
 # Upgrade the DB
 docker exec superset-new superset db upgrade
 ```
+
+## Amazon EC2 Container Service
+
+You can use Superset with Amazon EC2 Container Service. We have made ready made task definitions for use with MySQL. Run it by following this steps:
+
+1. On the host machine make the folder /data/superset/ a copy the `superset_config.py` file from `examples/mysql/superset` into it
+2. Set owner and group of both /data/superset/ and /data/superset/superset_config.py to 999
+3. Make a new Amazon ECS task definition using the JSON in `aws-task-def.json`
+4. Run your task
+5. Log into the host machine and initialize the database with an admin user and Superset tables using the superset-init helper script:
+```bash
+docker exec -it <container id> superset-init
+```
