@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Initialize Caravel
+# Initialize Superset
 superset-init
 
 # Load some data to play with
