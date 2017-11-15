@@ -17,6 +17,7 @@ RUN useradd -U -m superset && \
         build-essential \
         curl \
         default-libmysqlclient-dev \
+        libffi-dev \
         libldap2-dev \
         libpq-dev \
         libsasl2-dev \
