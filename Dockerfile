@@ -21,6 +21,7 @@ RUN useradd -U -m superset && \
         libpq-dev \
         libsasl2-dev \
         libssl-dev \
+        libffi-dev\
         openjdk-8-jdk \
         python3-dev \
         python3-pip && \
