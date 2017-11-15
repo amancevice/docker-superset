@@ -26,6 +26,7 @@ RUN useradd -U -m superset && \
         python3-dev \
         python3-pip && \
     pip3 install \
+        flask-cors==3.0.3 \
         flask-mail==0.9.1 \
         flask-oauth==0.12 \
         flask_oauthlib==0.9.3 \
