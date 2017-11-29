@@ -31,6 +31,8 @@ RUN useradd -U -m superset && \
         flask-oauth==0.12 \
         flask_oauthlib==0.9.3 \
         gevent==1.2.2 \
+        thrift_sasl==0.2.1 \
+        sasl \
         impyla==0.14.0 \
         mysqlclient==1.3.7 \
         psycopg2==2.6.1 \
