@@ -8,7 +8,7 @@ ENV LANG=C.UTF-8 \
     LC_ALL=C.UTF-8 \
     PYTHONPATH=/etc/superset:$PYTHONPATH \
     SUPERSET_VERSION=${SUPERSET_VERSION} \
-    SUPERSET_HOME=/home/superset
+    SUPERSET_HOME=/var/lib/superset
 
 # Create superset user & install dependencies
 RUN useradd -U -m superset && \
@@ -45,7 +45,8 @@ RUN useradd -U -m superset && \
 
 # Configure Filesystem
 COPY superset /usr/local/bin
-VOLUME /etc/superset
+VOLUME /etc/superset \
+       /var/lib/superset
 WORKDIR /home/superset
 
 # Deploy application
