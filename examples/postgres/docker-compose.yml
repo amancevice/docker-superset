@@ -25,7 +25,7 @@ services:
     ports:
       - "8088:8088"
     volumes:
-      - ./superset:/etc/superset
+      - ./superset_config.py:/etc/superset/superset_config.py
 volumes:
   postgres:
     external: false

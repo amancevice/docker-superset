@@ -1,2 +1,2 @@
-*/superset/*.db
-*/superset/__pycache__
+**/*.db
+**/__pycache__
