@@ -20,6 +20,14 @@ Follow the [instructions](https://superset.incubator.apache.org/installation.htm
 View the contents of the [`examples`](./examples) directory to see some simple `superset_config.py` samples.
 
 
+## Volumes
+
+The image defines two data volumes: one for mounting configuration into the container, and one for data (logs, SQLite DBs, &c).
+
+The configuration volume is located at `/etc/superset`. This directory is included in the `PYTHONPATH` of the image. Mount any configuration (specifically the `superset_config.py` file) here.
+
+The data volume is located at `/var/lib/superset` and it is where you would mount your SQLite file (if you are using that as your backend), or a volume to collect any logs that are routed there. This location is used as the value of the `SUPERSET_HOME` environmental variable.
+
 ## Database Initialization
 
 After starting the Superset server, initialize the database with an admin user and Superset tables using the `superset-init` helper script:
