@@ -6,7 +6,7 @@ ARG SUPERSET_VERSION=0.22.1
 # Configure environment
 ENV LANG=C.UTF-8 \
     LC_ALL=C.UTF-8 \
-    PYTHONPATH=/etc/superset:$PYTHONPATH \
+    PYTHONPATH=/etc/superset:/home/superset:$PYTHONPATH \
     SUPERSET_VERSION=${SUPERSET_VERSION} \
     SUPERSET_HOME=/var/lib/superset
 
@@ -45,7 +45,8 @@ RUN useradd -U -m superset && \
 
 # Configure Filesystem
 COPY superset /usr/local/bin
-VOLUME /etc/superset \
+VOLUME /home/superset \
+       /etc/superset \
        /var/lib/superset
 WORKDIR /home/superset
 

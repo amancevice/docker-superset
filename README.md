@@ -24,7 +24,7 @@ View the contents of the [`examples`](./examples) directory to see some simple `
 
 The image defines two data volumes: one for mounting configuration into the container, and one for data (logs, SQLite DBs, &c).
 
-The configuration volume is located at `/etc/superset`. This directory is included in the `PYTHONPATH` of the image. Mount any configuration (specifically the `superset_config.py` file) here.
+The configuration volume is located alternatively at `/etc/superset` or `/home/superset`; either is acceptable. Both of these directories are included in the `PYTHONPATH` of the image. Mount any configuration (specifically the `superset_config.py` file) here to have it read by the app on startup.
 
 The data volume is located at `/var/lib/superset` and it is where you would mount your SQLite file (if you are using that as your backend), or a volume to collect any logs that are routed there. This location is used as the value of the `SUPERSET_HOME` environmental variable.
 
