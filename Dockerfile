@@ -12,6 +12,10 @@ ENV LANG=C.UTF-8 \
 
 # Create superset user & install dependencies
 RUN useradd -U -m superset && \
+    mkdir /etc/superset  && \
+    mkdir ${SUPERSET_HOME} && \
+    chown -R superset:superset /etc/superset && \
+    chown -R superset:superset ${SUPERSET_HOME} && \
     apt-get update && \
     apt-get install -y \
         build-essential \
