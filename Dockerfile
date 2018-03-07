@@ -29,7 +29,9 @@ RUN useradd -U -m superset && \
         openjdk-8-jdk \
         python3-dev \
         python3-pip && \
-    pip3 install \
+    apt-get clean && \
+    rm -r /var/lib/apt/lists/* && \
+    pip3 install --no-cache-dir \
         flask-cors==3.0.3 \
         flask-mail==0.9.1 \
         flask-oauth==0.12 \
