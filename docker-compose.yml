@@ -4,7 +4,7 @@ services:
     build:
       context: .
       args:
-        SUPERSET_VERSION: 0.23.3
+        SUPERSET_VERSION: 0.24.0
     image: amancevice/superset
     ports:
       - 8088:8088

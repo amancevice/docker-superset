@@ -1,7 +1,7 @@
 FROM debian:stretch
 
 # Superset version
-ARG SUPERSET_VERSION=0.23.3
+ARG SUPERSET_VERSION=0.24.0
 
 # Configure environment
 ENV LANG=C.UTF-8 \
