@@ -76,7 +76,8 @@ docker-compose up -d redis
 # Wait for services to come up fully...
 
 # Touch SQLite db file
-touch superset.db
+mkdir -p superset
+touch superset/superset.db
 
 # Start Superset
 docker-compose up -d superset
