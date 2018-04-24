@@ -6,7 +6,7 @@ services:
     volumes:
       - redis:/data
   mysql:
-    image: mysql
+    image: mysql:5
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: superset
