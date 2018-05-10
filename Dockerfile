@@ -32,6 +32,7 @@ RUN useradd -U -m superset && \
     apt-get clean && \
     rm -r /var/lib/apt/lists/* && \
     pip3 install --no-cache-dir \
+        flask==0.12.2 \
         flask-cors==3.0.3 \
         flask-mail==0.9.1 \
         flask-oauth==0.12 \
