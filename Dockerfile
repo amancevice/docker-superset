@@ -31,7 +31,7 @@ RUN useradd -U -m superset && \
         python3-pip && \
     apt-get clean && \
     rm -r /var/lib/apt/lists/* && \
-    pip3 install --no-cache-dir \
+    pip3 install --upgrade --no-cache-dir \
         contextlib2==0.5.5 \
         flask==0.12.2 \
         flask-cors==3.0.3 \
