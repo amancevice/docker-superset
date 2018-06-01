@@ -26,7 +26,6 @@ RUN useradd -U -m superset && \
         libpq-dev \
         libsasl2-dev \
         libssl-dev \
-        openjdk-8-jdk \
         python3-dev \
         python3-pip && \
     apt-get clean && \
@@ -43,7 +42,6 @@ RUN useradd -U -m superset && \
         mysqlclient==1.3.7 \
         psycopg2==2.6.1 \
         pyathena==1.2.5 \
-        pyathenajdbc==1.2.0 \
         pyhive==0.5.0 \
         pyldap==2.4.28 \
         redis==2.10.5 \
