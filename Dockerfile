@@ -42,6 +42,7 @@ RUN useradd -U -m superset && \
         impyla==0.14.0 \
         mysqlclient==1.3.7 \
         psycopg2==2.6.1 \
+        pyathena==1.2.5 \
         pyathenajdbc==1.2.0 \
         pyhive==0.5.0 \
         pyldap==2.4.28 \
