@@ -1,7 +1,7 @@
 FROM debian:stretch
 
 # Superset version
-ARG SUPERSET_VERSION=0.25.5
+ARG SUPERSET_VERSION=0.25.6
 
 # Configure environment
 ENV LANG=C.UTF-8 \
@@ -63,6 +63,5 @@ WORKDIR /home/superset
 # Deploy application
 EXPOSE 8088
 HEALTHCHECK CMD ["curl", "-f", "http://localhost:8088/health"]
-ENTRYPOINT ["superset"]
-CMD ["runserver"]
+CMD ["gunicorn", "-w", "2", "--timeout", "60", "-b", "0.0.0.0:8088", "--limit-request-line", "0", "--limit-request-field_size", "0", "superset:app"]
 USER superset
