@@ -22,6 +22,8 @@ RUN useradd -U -m superset && \
         build-essential \
         curl \
         default-libmysqlclient-dev \
+        freetds-dev \
+        freetds-bin \
         libffi-dev \
         libldap2-dev \
         libpq-dev \
@@ -42,6 +44,7 @@ RUN useradd -U -m superset && \
         gevent==1.2.2 \
         impyla==0.14.0 \
         mysqlclient==1.3.7 \
+        pymssql==2.1.3 \
         psycopg2==2.6.1 \
         pyathena==1.2.5 \
         pyhive==0.5.1 \
