@@ -1,7 +1,7 @@
 FROM debian:stretch
 
 # Superset version
-ARG SUPERSET_VERSION=0.25.6
+ARG SUPERSET_VERSION=0.26.3
 
 # Configure environment
 ENV LANG=C.UTF-8 \
@@ -36,23 +36,21 @@ RUN useradd -U -m superset && \
     curl https://raw.githubusercontent.com/${SUPERSET_REPO}/${SUPERSET_VERSION}/requirements.txt -o requirements.txt && \
     pip3 install --no-cache-dir \
         -r requirements.txt \
-        Werkzeug==0.12.1 \
-        flask-cors==3.0.3 \
-        flask-mail==0.9.1 \
+        Werkzeug==0.14.1 \
+        flask-cors==3.0.6 \
+        flask-mail==0.9.1 \ 
         flask-oauth==0.12 \
-        flask_oauthlib==0.9.3 \
-        gevent==1.2.2 \
-        impyla==0.14.0 \
-        mysqlclient==1.3.7 \
+        flask_oauthlib==0.9.5 \
+        gevent==1.3.4 \
+        impyla==0.14.1 \
+        mysqlclient==1.3.13 \
         pymssql==2.1.3 \
-        psycopg2==2.6.1 \
+        psycopg2==2.7.5 \
         pyathena==1.2.5 \
-        pyhive==0.5.1 \
-        pyldap==2.4.28 \
-        redis==2.10.5 \
-        sqlalchemy-redshift==0.5.0 \
+        pyldap==3.0.0 \
+        redis==2.10.6 \
         sqlalchemy-clickhouse==0.1.3.post0 \
-        sqlalchemy-redshift==0.5.0 \
+        sqlalchemy-redshift==0.7.1 \ 
         superset==${SUPERSET_VERSION} && \
     rm requirements.txt
 
