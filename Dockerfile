@@ -34,8 +34,8 @@ RUN useradd -U -m superset && \
     apt-get clean && \
     rm -r /var/lib/apt/lists/* && \
     curl https://raw.githubusercontent.com/${SUPERSET_REPO}/${SUPERSET_VERSION}/requirements.txt -o requirements.txt && \
+    pip3 install --no-cache-dir -r requirements.txt && \
     pip3 install --no-cache-dir \
-        -r requirements.txt \
         Werkzeug==0.12.1 \
         flask-cors==3.0.3 \
         flask-mail==0.9.1 \
@@ -43,14 +43,14 @@ RUN useradd -U -m superset && \
         flask_oauthlib==0.9.3 \
         gevent==1.2.2 \
         impyla==0.14.0 \
+        infi.clickhouse-orm==0.9.8 \
         mysqlclient==1.3.7 \
-        pymssql==2.1.3 \
         psycopg2==2.6.1 \
         pyathena==1.2.5 \
         pyhive==0.5.1 \
         pyldap==2.4.28 \
+        pymssql==2.1.3 \
         redis==2.10.5 \
-        sqlalchemy-redshift==0.5.0 \
         sqlalchemy-clickhouse==0.1.3.post0 \
         sqlalchemy-redshift==0.5.0 \
         superset==${SUPERSET_VERSION} && \
