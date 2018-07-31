@@ -51,7 +51,7 @@ RUN useradd -U -m superset && \
         pyldap==2.4.28 \
         pymssql==2.1.3 \
         redis==2.10.5 \
-        sqlalchemy-clickhouse==0.1.3.post0 \
+        https://github.com/JustOnce/sqlalchemy-clickhouse/archive/master.zip \
         sqlalchemy-redshift==0.5.0 \
         superset==${SUPERSET_VERSION} && \
     rm requirements.txt
