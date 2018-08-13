@@ -8,6 +8,12 @@ Docker image for [Superset](https://github.com/ApacheInfra/superset).
 Navigate to the [`examples`](./examples) directory to view examples of how to configure Superset with MySQL, PostgreSQL, or SQLite.
 
 
+## Environments
+
+* `GUNICORN_WORKER` It is gunicorn `-w` parameter
+* `GUNICORN_TIMEOUT`: It is gunicorn `--timeout` parameter
+
+
 ## Versions
 
 This repo is tagged in parallel with superset. Pulling `amancevice/superset:0.18.5` will fetch the image of this repository running superset version `0.18.5`. It is possible that the `latest` tag includes new features/support libraries but will usually be in sync with the latest semantic version.
