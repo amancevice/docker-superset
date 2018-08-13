@@ -9,7 +9,9 @@ ENV LANG=C.UTF-8 \
     PYTHONPATH=/etc/superset:/home/superset:$PYTHONPATH \
     SUPERSET_REPO=apache/incubator-superset \
     SUPERSET_VERSION=${SUPERSET_VERSION} \
-    SUPERSET_HOME=/var/lib/superset
+    SUPERSET_HOME=/var/lib/superset \
+    GUNICORN_WORKER=2 \
+    GUNICORN_TIMEOUT=60
 
 # Create superset user & install dependencies
 RUN useradd -U -m superset && \
@@ -66,5 +68,12 @@ WORKDIR /home/superset
 # Deploy application
 EXPOSE 8088
 HEALTHCHECK CMD ["curl", "-f", "http://localhost:8088/health"]
-CMD ["gunicorn", "-w", "2", "--timeout", "60", "-b", "0.0.0.0:8088", "--limit-request-line", "0", "--limit-request-field_size", "0", "superset:app"]
+
+COPY docker-entrypoint.sh /usr/local/bin/
+RUN chmod 755 /usr/local/bin/docker-entrypoint.sh
+RUN ln -s /usr/local/bin/docker-entrypoint.sh / # backwards compatiple
+
+ENTRYPOINT ["docker-entrypoint.sh"]
+CMD ["gunicorn", "-w", "${GUNICORN_WORKER}", "--timeout", "${GUNICORN_TIMEOUT}", "-b", "0.0.0.0:8088", "--limit-request-line", "0", "--limit-request-field_size", "0", "superset:app"]
+
 USER superset

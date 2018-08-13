@@ -8,3 +8,6 @@ services:
     image: amancevice/superset
     ports:
       - 8088:8088
+    environment:
+      - GUNICORN_TIMEOUT=120
+      - GUNICORN_WORKER=2
