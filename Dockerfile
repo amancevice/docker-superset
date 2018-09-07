@@ -42,6 +42,7 @@ RUN useradd -U -m superset && \
     curl https://raw.githubusercontent.com/${SUPERSET_REPO}/${SUPERSET_VERSION}/requirements.txt -o requirements.txt && \
     pip3 install --no-cache-dir -r requirements.txt && \
     pip3 install --no-cache-dir \
+        setuptools==40.2.0 \
         Werkzeug==0.12.1 \
         flask-cors==3.0.3 \
         flask-mail==0.9.1 \
