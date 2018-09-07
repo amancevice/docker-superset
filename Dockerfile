@@ -53,6 +53,7 @@ RUN useradd -U -m superset && \
         mysqlclient==1.3.7 \
         psycopg2==2.6.1 \
         pyathena==1.2.5 \
+        pybigquery==0.4.3 \
         pyhive==0.5.1 \
         pyldap==2.4.28 \
         pymssql==2.1.3 \
