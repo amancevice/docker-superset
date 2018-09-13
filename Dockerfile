@@ -1,7 +1,7 @@
 FROM debian:stretch
 
 # Superset version
-ARG SUPERSET_VERSION=0.26.3
+ARG SUPERSET_VERSION=0.27.0
 
 # Configure environment
 ENV GUNICORN_BIND=0.0.0.0:8088 \
