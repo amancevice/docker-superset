@@ -18,6 +18,12 @@ services:
     volumes:
       - ./superset_config.py:/etc/superset/superset_config.py
       - ./superset:/var/lib/superset
+  jupyter:
+    image: jupyter/base-notebook
+    restart: always
+    ports:
+      - "8889:8888"
+    command: start-notebook.sh --NotebookApp.token=''
 volumes:
   redis:
     external: false
