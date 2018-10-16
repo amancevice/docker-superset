@@ -1,7 +1,7 @@
 FROM debian:stretch
 
 # Superset version
-ARG SUPERSET_VERSION=0.27.0
+ARG SUPERSET_VERSION=0.28.0
 
 # Configure environment
 ENV GUNICORN_BIND=0.0.0.0:8088 \
@@ -51,6 +51,7 @@ RUN useradd -U -m superset && \
         impyla==0.14.0 \
         infi.clickhouse-orm==1.0.2 \
         mysqlclient==1.3.7 \
+        numpy==1.14.5 \
         psycopg2==2.6.1 \
         pyathena==1.2.5 \
         pyhive==0.5.1 \
