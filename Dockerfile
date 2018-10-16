@@ -1,4 +1,4 @@
-FROM debian:stretch
+FROM python:3.6
 
 # Superset version
 ARG SUPERSET_VERSION=0.28.0
@@ -34,14 +34,12 @@ RUN useradd -U -m superset && \
         libldap2-dev \
         libpq-dev \
         libsasl2-dev \
-        libssl-dev \
-        python3-dev \
-        python3-pip && \
+        libssl-dev && \
     apt-get clean && \
     rm -r /var/lib/apt/lists/* && \
     curl https://raw.githubusercontent.com/${SUPERSET_REPO}/${SUPERSET_VERSION}/requirements.txt -o requirements.txt && \
-    pip3 install --no-cache-dir -r requirements.txt && \
-    pip3 install --no-cache-dir \
+    pip install --no-cache-dir -r requirements.txt && \
+    pip install --no-cache-dir \
         Werkzeug==0.12.1 \
         flask-cors==3.0.3 \
         flask-mail==0.9.1 \
