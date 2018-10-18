@@ -1,0 +1,56 @@
+*.bak
+*.db
+*.pyc
+*.sqllite
+*.swp
+.coverage
+.DS_Store
+.eggs
+.idea
+.python-version
+.tox
+.vscode
+_build
+_images
+_modules
+_static
+build
+app.db
+changelog.sh
+dist
+dump.rdb
+env
+env_py3
+envpy3
+local_config.py
+superset_config.py
+superset.egg-info/
+superset/bin/supersetc
+tmp
+
+# Node.js, webpack artifacts
+*.entry.js
+*.js.map
+node_modules
+npm-debug.log*
+superset/assets/coverage/*
+superset/assets/cypress/screenshots
+superset/assets/cypress/videos
+superset/assets/version_info.json
+yarn-error.log
+
+# IntelliJ
+*.iml
+venv
+@eaDir/
+
+# docker
+# /Dockerfile
+# /docker-build.sh
+# /docker-compose.yml
+# /docker-entrypoint.sh
+# /docker-init.sh
+
+# Custom
+*/data/*
+*/.ipynb_checkpoints

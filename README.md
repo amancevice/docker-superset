@@ -1,3 +1,7 @@
+# Overview
+
+This repository is attempting to combine superset, jupyter, and a database of your choice together for an exploratory data analysis environment.
+
 # Superset
 
 Docker image for [Superset](https://github.com/ApacheInfra/superset).

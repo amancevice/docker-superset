@@ -37,6 +37,12 @@ services:
     volumes:
       - ./superset:/etc/superset
     command: worker
+  jupyter:
+    image: jupyter/base-notebook
+    restart: always
+    ports:
+      - "8889:8888"
+    command: start-notebook.sh --NotebookApp.token=''
 volumes:
   postgres:
     external: false
