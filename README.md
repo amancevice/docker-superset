@@ -54,4 +54,7 @@ docker run --detach --name superset-new [options] amancevice/superset
 
 # Upgrade the DB
 docker exec superset-new superset db upgrade
+
+# Sync the base permissions
+docker exec superset-new superset init
 ```
