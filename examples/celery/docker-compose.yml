@@ -36,7 +36,7 @@ services:
       MAPBOX_API_KEY: ${MAPBOX_API_KEY}
     volumes:
       - ./superset:/etc/superset
-    command: worker
+    command: celery worker
 volumes:
   postgres:
     external: false
