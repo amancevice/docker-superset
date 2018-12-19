@@ -38,6 +38,7 @@ RUN useradd -U -m superset && \
     apt-get clean && \
     rm -r /var/lib/apt/lists/* && \
     curl https://raw.githubusercontent.com/${SUPERSET_REPO}/${SUPERSET_VERSION}/requirements.txt -o requirements.txt && \
+    sed -i -e 's/cryptography==1.9/cryptography==2.1.1/g' requirements.txt && \
     pip install --no-cache-dir -r requirements.txt && \
     pip install --no-cache-dir \
         Werkzeug==0.12.1 \
