@@ -19,7 +19,6 @@ Follow the [instructions](https://superset.incubator.apache.org/installation.htm
 
 View the contents of the [`examples`](./examples) directory to see some simple `superset_config.py` samples.
 
-
 ## Volumes
 
 The image defines two data volumes: one for mounting configuration into the container, and one for data (logs, SQLite DBs, &c).

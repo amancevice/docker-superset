@@ -62,13 +62,17 @@ RUN useradd -U -m superset && \
 
 # Configure Filesystem
 COPY superset /usr/local/bin
+
 VOLUME /home/superset \
        /etc/superset \
        /var/lib/superset
 WORKDIR /home/superset
+USER superset
 
 # Deploy application
 EXPOSE 8088
 HEALTHCHECK CMD ["curl", "-f", "http://localhost:8088/health"]
+
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
+
 CMD ["gunicorn", "superset:app"]
-USER superset

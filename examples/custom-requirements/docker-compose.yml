@@ -1,0 +1,34 @@
+version: '3'
+services:
+  redis:
+    image: redis
+    restart: always
+    volumes:
+      - redis:/data
+  postgres:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_DB: superset
+      POSTGRES_PASSWORD: superset
+      POSTGRES_USER: superset
+    volumes:
+      - postgres:/var/lib/postgresql/data
+  superset:
+    image: amancevice/superset
+    restart: always
+    depends_on:
+      - postgres
+      - redis
+    environment:
+      MAPBOX_API_KEY: ${MAPBOX_API_KEY}
+    ports:
+      - "8088:8088"
+    volumes:
+      - ./requirements.txt:/requirements.txt
+      - ./superset_config.py:/etc/superset/superset_config.py
+volumes:
+  postgres:
+    external: false
+  redis:
+    external: false

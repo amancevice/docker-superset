@@ -66,6 +66,31 @@ docker-compose exec superset superset-demo
 docker-compose down -v
 ```
 
+## Run with custom python requirements
+
+Modify and mount `requirements.txt` to container `/requirements.txt` will let container run all custom python packages defined
+
+```bash
+cd postgres
+
+# Start Redis & PostgreSQL services
+docker-compose up -d redis postgres
+# Wait for services to come up fully...
+
+# Start Superset
+docker-compose up -d superset
+# Wait for Superset to come up fully...
+
+# Initialize demo
+docker-compose exec superset superset-demo
+# or `docker-compose exec superset superset-init` if no demo data needed
+
+# Play around in demo...
+
+# Bring everything down
+docker-compose down -v
+```
+
 ## SQLite
 
 ```bash
