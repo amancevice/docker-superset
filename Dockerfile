@@ -1,7 +1,7 @@
 FROM python:3.6
 
 # Superset version
-ARG SUPERSET_VERSION=0.28.1
+ARG SUPERSET_VERSION=0.29.0rc7
 
 # Configure environment
 ENV GUNICORN_BIND=0.0.0.0:8088 \
