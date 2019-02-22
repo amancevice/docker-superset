@@ -40,7 +40,7 @@ RUN useradd -U -m superset && \
     curl https://raw.githubusercontent.com/${SUPERSET_REPO}/${SUPERSET_VERSION}/requirements.txt -o requirements.txt && \
     pip install --no-cache-dir -r requirements.txt && \
     pip install --no-cache-dir \
-        Werkzeug==0.12.1 \
+        Werkzeug==0.14.1 \
         flask-cors==3.0.3 \
         flask-mail==0.9.1 \
         flask-oauth==0.12 \
