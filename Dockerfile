@@ -34,6 +34,8 @@ RUN useradd -U -m superset && \
         libldap2-dev \
         libpq-dev \
         libsasl2-dev \
+	libsasl2-2 \
+	libsasl2-modules-gssapi-mit \
         libssl1.0 && \
     apt-get clean && \
     rm -r /var/lib/apt/lists/* && \
