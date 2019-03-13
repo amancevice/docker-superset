@@ -2,6 +2,16 @@
 
 Docker image for [Superset](https://github.com/ApacheInfra/superset).
 
+This project is unofficial and not related to Superset or Apache.
+
+## Issues
+
+Please **only** file issues in this project that are related to Docker and **do** include the Docker commands or compose configuration of your setup when filing issues (be sure to hide any secrets/passwords before submitting).
+
+File issues/bugs with Superset at the [source](https://github.com/apache/incubator-superset/issues).
+
+Please **do not** files issues like "Please include `<some-python-pip>` in the Dockerfile," open a [pull request](https://github.com/amancevice/superset/pulls) for updates/enhancements.
+
 
 ## Examples
 
