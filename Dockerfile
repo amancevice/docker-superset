@@ -54,6 +54,7 @@ RUN useradd -U -m superset && \
         pyhive==0.5.1 \
         pyldap==2.4.28 \
         pymssql==2.1.3 \
+        pybigquery==0.4.10 \
         redis==2.10.5 \
         sqlalchemy-clickhouse==0.1.5.post0 \
         sqlalchemy-redshift==0.7.1 \
