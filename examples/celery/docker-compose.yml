@@ -39,6 +39,4 @@ services:
     command: celery worker
 volumes:
   postgres:
-    external: false
   redis:
-    external: false

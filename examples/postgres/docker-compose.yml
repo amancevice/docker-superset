@@ -28,6 +28,4 @@ services:
       - ./superset_config.py:/etc/superset/superset_config.py
 volumes:
   postgres:
-    external: false
   redis:
-    external: false
