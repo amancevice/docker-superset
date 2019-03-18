@@ -28,8 +28,8 @@ RUN useradd -U -m superset && \
         build-essential \
         curl \
         default-libmysqlclient-dev \
-        freetds-dev \
         freetds-bin \
+        freetds-dev \
         libffi-dev \
         libldap2-dev \
         libpq-dev \
@@ -39,8 +39,8 @@ RUN useradd -U -m superset && \
     rm -r /var/lib/apt/lists/* && \
     curl https://raw.githubusercontent.com/${SUPERSET_REPO}/${SUPERSET_VERSION}/requirements.txt -o requirements.txt && \
     pip install --no-cache-dir -r requirements.txt && \
+    rm requirements.txt && \
     pip install --no-cache-dir \
-        Werkzeug==0.14.1 \
         flask-cors==3.0.3 \
         flask-mail==0.9.1 \
         flask-oauth==0.12 \
@@ -51,15 +51,15 @@ RUN useradd -U -m superset && \
         mysqlclient==1.3.7 \
         psycopg2==2.6.1 \
         pyathena==1.2.5 \
+        pybigquery==0.4.10 \
         pyhive==0.5.1 \
         pyldap==2.4.28 \
         pymssql==2.1.3 \
-        pybigquery==0.4.10 \
         redis==2.10.5 \
         sqlalchemy-clickhouse==0.1.5.post0 \
         sqlalchemy-redshift==0.7.1 \
-        superset==${SUPERSET_VERSION} && \
-    rm requirements.txt
+        werkzeug==0.14.1 && \
+    pip install superset==${SUPERSET_VERSION}
 
 # Configure Filesystem
 COPY superset /usr/local/bin
