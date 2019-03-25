@@ -44,7 +44,7 @@ RUN useradd -U -m superset && \
         flask-cors==3.0.3 \
         flask-mail==0.9.1 \
         flask-oauth==0.12 \
-        flask_oauthlib==0.9.3 \
+        flask_oauthlib==0.9.5 \
         gevent==1.2.2 \
         impyla==0.14.0 \
         infi.clickhouse-orm==1.0.2 \
