@@ -1,4 +1,6 @@
 language: node_js
-before_script:
+install:
 - npm install -g dockerlint
-script: dockerlint
+script:
+- dockerlint
+- make
