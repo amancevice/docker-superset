@@ -1,7 +1,7 @@
 FROM python:3.6
 
 # Superset version
-ARG SUPERSET_VERSION=0.29.0rc7
+ARG SUPERSET_VERSION=0.33.0rc1
 
 # Configure environment
 ENV GUNICORN_BIND=0.0.0.0:8088 \
@@ -14,61 +14,60 @@ ENV GUNICORN_BIND=0.0.0.0:8088 \
     PYTHONPATH=/etc/superset:/home/superset:$PYTHONPATH \
     SUPERSET_REPO=apache/incubator-superset \
     SUPERSET_VERSION=${SUPERSET_VERSION} \
+    SUPERSET_DOWNLOAD_URL=https://github.com/apache/incubator-superset/archive/$SUPERSET_VERSION.tar.gz \
     SUPERSET_HOME=/var/lib/superset
 ENV GUNICORN_CMD_ARGS="--workers ${GUNICORN_WORKERS} --timeout ${GUNICORN_TIMEOUT} --bind ${GUNICORN_BIND} --limit-request-line ${GUNICORN_LIMIT_REQUEST_LINE} --limit-request-field_size ${GUNICORN_LIMIT_REQUEST_FIELD_SIZE}"
 
 # Create superset user & install dependencies
 RUN useradd -U -m superset && \
     mkdir /etc/superset  && \
-    mkdir ${SUPERSET_HOME} && \
+    mkdir -p ${SUPERSET_HOME} && \
     chown -R superset:superset /etc/superset && \
     chown -R superset:superset ${SUPERSET_HOME} && \
     apt-get update && \
     apt-get install -y \
-        build-essential \
-        curl \
-        default-libmysqlclient-dev \
-        freetds-bin \
-        freetds-dev \
-        libffi-dev \
-        libldap2-dev \
-        libpq-dev \
-        libsasl2-2 \
-        libsasl2-dev \
-        libsasl2-modules-gssapi-mit \
-        libssl1.0 && \
-    apt-get clean && \
-    rm -r /var/lib/apt/lists/* && \
-    curl https://raw.githubusercontent.com/${SUPERSET_REPO}/${SUPERSET_VERSION}/requirements.txt -o requirements.txt && \
-    pip install --no-cache-dir -r requirements.txt && \
-    rm requirements.txt && \
-    pip install --no-cache-dir \
-        flask-cors==3.0.3 \
-        flask-mail==0.9.1 \
-        flask-oauth==0.12 \
-        flask_oauthlib==0.9.5 \
-        gevent==1.2.2 \
-        impyla==0.14.0 \
-        infi.clickhouse-orm==1.0.2 \
-        mysqlclient==1.3.7 \
-        psycopg2==2.6.1 \
-        pyathena==1.5.1 \
-        pybigquery==0.4.10 \
-        pyhive==0.5.1 \
-        pyldap==2.4.28 \
-        pymssql==2.1.3 \
-        redis==2.10.5 \
-        sqlalchemy-clickhouse==0.1.5.post0 \
-        sqlalchemy-redshift==0.7.1 \
-        werkzeug==0.14.1 && \
-    pip install superset==${SUPERSET_VERSION}
+        apt-transport-https apt-utils
+
+# Install common useful packages
+RUN apt-get install -y vim less curl netcat postgresql-client redis-tools
+
+RUN apt-get update -y && apt-get install -y build-essential libssl-dev \
+    libffi-dev python3-dev libsasl2-dev libldap2-dev libxi-dev
+
+# Install nodejs for custom build
+# https://github.com/apache/incubator-superset/blob/master/docs/installation.rst#making-your-own-build
+# https://nodejs.org/en/download/package-manager/
+RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - \
+    && apt-get install -y nodejs
+
+WORKDIR $SUPERSET_HOME
+
+# Download & install superset
+RUN wget -O superset.tar.gz $SUPERSET_DOWNLOAD_URL \
+    && tar -xzf superset.tar.gz -C $SUPERSET_HOME --strip-components=1 \
+    && rm superset.tar.gz
+
+# RUN mkdir -p /home/superset/.cache
+# RUN mkdir -p /home/superset/config
+COPY database-dependencies.txt .
+
+RUN pip install --upgrade setuptools pip \
+    && pip install -r requirements.txt \
+    && pip install -r requirements-dev.txt \
+    && pip install -e . \
+    && pip install -r database-dependencies.txt
+
+RUN cd superset/assets \
+    && npm ci \
+    && npm run build \
+    && rm -rf node_modules
 
 # Configure Filesystem
-COPY superset /usr/local/bin
 VOLUME /home/superset \
        /etc/superset \
        /var/lib/superset
 WORKDIR /home/superset
+RUN chown -R superset:superset ${SUPERSET_HOME} 
 
 # Deploy application
 EXPOSE 8088
