@@ -1,7 +1,24 @@
-FROM python:3.6-jessie
+##
+# Build assets
+FROM node:12.7 AS build
+ARG SUPERSET_VERSION=0.33.0rc1
+WORKDIR /var/lib/superset/
+RUN wget -O superset.tar.gz https://github.com/apache/incubator-superset/archive/${SUPERSET_VERSION}.tar.gz
+RUN tar xzf superset.tar.gz -C /var/lib/superset/ --strip-components=1
+WORKDIR /var/lib/superset/superset/assets
+RUN npm install
+RUN npm run build
 
-# Superset version
-ARG SUPERSET_VERSION=0.29.0rc7
+##
+# Install Superset and dependencies as Python packages
+FROM python:3.6 AS install
+WORKDIR /var/lib/superset/
+COPY --from=build /var/lib/superset/ .
+RUN pip install . -r requirements.txt
+
+##
+# Build runtime
+FROM python:3.6 AS runtime
 
 # Configure environment
 ENV GUNICORN_BIND=0.0.0.0:8088 \
@@ -27,7 +44,7 @@ RUN useradd -U -m superset && \
     apt-get install -y \
         build-essential \
         curl \
-        libmysqlclient-dev \
+        default-libmysqlclient-dev \
         freetds-bin \
         freetds-dev \
         libffi-dev \
@@ -37,12 +54,13 @@ RUN useradd -U -m superset && \
         libsasl2-dev \
         libsasl2-modules-gssapi-mit \
         libssl1.0 && \
-    apt-get clean && \
-    rm -r /var/lib/apt/lists/* && \
-    curl https://raw.githubusercontent.com/${SUPERSET_REPO}/${SUPERSET_VERSION}/requirements.txt -o requirements.txt && \
-    pip install --no-cache-dir -r requirements.txt && \
-    rm requirements.txt && \
-    pip install --no-cache-dir \
+    apt-get clean
+
+# Copy Superset from build stage & install database helpers
+WORKDIR /usr/local/lib/python3.6/site-packages
+COPY --from=install /usr/local/lib/python3.6/site-packages .
+RUN pip install --no-cache-dir \
+        cython==0.29.13 \
         flask-cors==3.0.3 \
         flask-mail==0.9.1 \
         flask-oauth==0.12 \
@@ -60,8 +78,7 @@ RUN useradd -U -m superset && \
         redis==2.10.5 \
         sqlalchemy-clickhouse==0.1.5.post0 \
         sqlalchemy-redshift==0.7.1 \
-        werkzeug==0.14.1 && \
-    pip install superset==${SUPERSET_VERSION}
+        werkzeug==0.14.1
 
 # Configure Filesystem
 COPY superset /usr/local/bin

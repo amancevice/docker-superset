@@ -1,37 +1,36 @@
-stages         := build install runtime
-edge_version   := 0.33.0rc1
-stable_version := 0.29.0rc7
+stages           := build install runtime
+superset_version := 0.33.0rc1
+build            := $(shell git describe --tags --always)
+shells           := $(foreach stage,$(stages),shell@$(stage))
 
-.PHONY: all edge clean $(foreach stage,$(stages),edge@$(stage))
+.PHONY: all clean push $(stages) $(shells)
 
-all: stable
+all: .docker/$(build)
 
 .docker:
 	mkdir -p $@
 
-.docker/edge@install: .docker/edge@build
-.docker/edge@runtime: .docker/edge@install
-.docker/edge@%: | .docker
+.docker/$(build)@install: .docker/$(build)@build
+.docker/$(build)@runtime: .docker/$(build)@install
+.docker/$(build)@%: | .docker
 	docker build \
-	--build-arg SUPERSET_VERSION=$(edge_version) \
-	--file Dockerfile.edge \
+	--build-arg SUPERSET_VERSION=$(superset_version) \
 	--iidfile $@ \
-	--tag amancevice/superset:edge-$* \
+	--tag amancevice/superset:$(build)-$* \
 	--target $* .
 
-.docker/%: | .docker
-	docker build \
-	--build-arg SUPERSET_VERSION=$* \
-	--iidfile $@ \
-	--tag amancevice/superset:$* .
+.docker/$(build): .docker/$(build)@runtime
+	docker tag $(shell cat $<) amancevice/superset:$(superset_version)
+	docker tag $(shell cat $<) amancevice/superset:latest
 
 clean:
 	-docker image rm -f $(shell awk {print} .docker/*)
 	-rm -rf .docker
 
-edge: .docker/edge@runtime
-	docker tag $(shell cat $<) amancevice/superset:edge
+push:
+	docker push amancevice/superset:$(build) amancevice/superset:latest
 
-edge@stage: edge@%: .docker/edge@%
+$(stages): %: .docker/$(build)@%
 
-stable: .docker/$(stable_version)
+$(shells): shell@%: .docker/$(build)@%
+	docker run --rm -it --entrypoint /bin/bash $(shell cat $<)

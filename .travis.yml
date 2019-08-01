@@ -1,9 +1,14 @@
 language: node_js
-env:
-- BRANCH=stable
-- BRANCH=edge
 install:
 - npm install -g dockerlint
 script:
 - dockerlint
-- make ${BRANCH}
+- make
+before_deploy:
+- docker login -u ${DOCKERHUB_USERNAME} -p ${DOCKERHUB_PASSWORD}
+deploy:
+- provider: script
+  script: make push
+  on:
+    tags: true
+    repo: amancevice/docker-superset
