@@ -1,4 +1,4 @@
-FROM python:3.6
+FROM python:3.6-jessie
 
 # Superset version
 ARG SUPERSET_VERSION=0.29.0rc7
@@ -27,7 +27,7 @@ RUN useradd -U -m superset && \
     apt-get install -y \
         build-essential \
         curl \
-        default-libmysqlclient-dev \
+        libmysqlclient-dev \
         freetds-bin \
         freetds-dev \
         libffi-dev \

@@ -1,4 +1,4 @@
-FROM node:12.6 AS build
+FROM node:12.7 AS build
 ARG SUPERSET_VERSION=0.33.0rc1
 WORKDIR /var/lib/superset/
 RUN wget -O superset.tar.gz https://github.com/apache/incubator-superset/archive/${SUPERSET_VERSION}.tar.gz
