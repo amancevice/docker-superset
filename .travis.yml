@@ -1,6 +1,9 @@
 language: node_js
+env:
+- BRANCH=stable
+- BRANCH=edge
 install:
 - npm install -g dockerlint
 script:
 - dockerlint
-- make
+- make ${BRANCH}
