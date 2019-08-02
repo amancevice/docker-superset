@@ -1,6 +1,6 @@
 version: '3'
 services:
   superset:
-    image: amancevice/superset
+    image: amancevice/superset:edge
     ports:
       - 8088:8088

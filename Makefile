@@ -1,4 +1,4 @@
-stages           := build install runtime
+stages           := build dist final
 superset_version := 0.33.0rc1
 build            := $(shell git describe --tags --always)
 shells           := $(foreach stage,$(stages),shell@$(stage))
@@ -10,8 +10,8 @@ all: .docker/$(build)
 .docker:
 	mkdir -p $@
 
-.docker/$(build)@install: .docker/$(build)@build
-.docker/$(build)@runtime: .docker/$(build)@install
+.docker/$(build)@dist: .docker/$(build)@build
+.docker/$(build)@final: .docker/$(build)@dist
 .docker/$(build)@%: | .docker
 	docker build \
 	--build-arg SUPERSET_VERSION=$(superset_version) \
@@ -19,16 +19,21 @@ all: .docker/$(build)
 	--tag amancevice/superset:$(build)-$* \
 	--target $* .
 
-.docker/$(build): .docker/$(build)@runtime
-	docker tag $(shell cat $<) amancevice/superset:$(superset_version)
-	docker tag $(shell cat $<) amancevice/superset:latest
+.docker/$(build): .docker/$(build)@final
+	docker tag $(shell cat $<) amancevice/superset:$(build)
+	cp $< $@
 
 clean:
 	-docker image rm -f $(shell awk {print} .docker/*)
 	-rm -rf .docker
 
-push:
-	docker push amancevice/superset:$(build) amancevice/superset:latest
+demo: .docker/$(build)
+	docker run --detach \
+	--name superset-$(build) \
+	--publish 8088:8088 \
+	$(shell cat $<)
+	docker exec -it superset-$(build) superset-demo
+	docker logs -f superset-$(build)
 
 $(stages): %: .docker/$(build)@%
 

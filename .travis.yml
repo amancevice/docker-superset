@@ -3,12 +3,11 @@ install:
 - npm install -g dockerlint
 script:
 - dockerlint
-- make
+- make build=edge
 before_deploy:
 - docker login -u ${DOCKERHUB_USERNAME} -p ${DOCKERHUB_PASSWORD}
 deploy:
 - provider: script
-  script: make push
+  script: docker push amancevice/superset:edge
   on:
-    tags: true
     repo: amancevice/docker-superset
