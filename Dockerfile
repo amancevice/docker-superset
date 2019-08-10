@@ -1,9 +1,12 @@
+ARG NODE_VERSION=latest
+ARG PYTHON_VERSION=latest
+
 # --- Build assets with NodeJS
 
-FROM node:12.7 AS build
+FROM node:${NODE_VERSION} AS build
 
 # Superset version to build
-ARG SUPERSET_VERSION=0.33.0rc1
+ARG SUPERSET_VERSION=master
 ENV SUPERSET_HOME=/var/lib/superset/
 
 # Download source
@@ -18,7 +21,7 @@ RUN npm install && \
 
 # --- Build dist package
 
-FROM python:3.6 AS dist
+FROM python:${PYTHON_VERSION} AS dist
 
 # Copy prebuilt workspace into stage
 ENV SUPERSET_HOME=/var/lib/superset/
@@ -32,7 +35,7 @@ RUN python setup.py sdist && \
 
 # --- Install dist package and finalize app
 
-FROM python:3.6 AS final
+FROM python:${PYTHON_VERSION} AS final
 
 # Configure environment
 ENV GUNICORN_BIND=0.0.0.0:8088 \
