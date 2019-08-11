@@ -58,7 +58,8 @@ edge: .docker/edge
 latest: .docker/latest .docker/$(superset_version)
 
 push: .docker/latest .docker/$(superset_version)
-	docker push $(image):$(superset_version) $(image):latest
+	docker push $(image):$(superset_version)
+	docker push $(image):latest
 
 $(stages): %: .docker/$(superset_version)@%
 
