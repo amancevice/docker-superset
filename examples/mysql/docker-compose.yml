@@ -6,13 +6,14 @@ services:
     volumes:
       - redis:/data
   mysql:
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
     image: mysql:5
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: superset
       MYSQL_DATABASE: superset
-      MYSQL_USER: superset
       MYSQL_PASSWORD: superset
+      MYSQL_ROOT_PASSWORD: superset
+      MYSQL_USER: superset
     volumes:
       - mysql:/var/lib/mysql
   superset:
