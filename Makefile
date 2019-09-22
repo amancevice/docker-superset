@@ -2,9 +2,9 @@ image  := amancevice/superset
 stages := build dist final
 shells := $(foreach stage,$(stages),shell@$(stage))
 
-node_version     = 12.10
-python_version   = 3.6
-superset_version = 0.34.0
+node_version     := 12.10
+python_version   := 3.6
+superset_version := 0.34.0
 
 .PHONY: all clean demo edge push $(stages) $(shells)
 
