@@ -19,7 +19,7 @@ WORKDIR ${SUPERSET_HOME}/superset/assets
 RUN npm install && \
     npm run build
 
-# --- Build dist package
+# --- Build dist package with Python 3
 
 FROM python:${PYTHON_VERSION} AS dist
 
