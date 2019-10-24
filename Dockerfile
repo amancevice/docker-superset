@@ -42,14 +42,15 @@ ENV GUNICORN_BIND=0.0.0.0:8088 \
     GUNICORN_LIMIT_REQUEST_FIELD_SIZE=0 \
     GUNICORN_LIMIT_REQUEST_LINE=0 \
     GUNICORN_TIMEOUT=60 \
-    GUNICORN_WORKERS=2 \
+    GUNICORN_WORKERS=3 \
+    GUNICORN_THREADS=4 \
     LANG=C.UTF-8 \
     LC_ALL=C.UTF-8 \
     PYTHONPATH=/etc/superset:/home/superset:$PYTHONPATH \
     SUPERSET_REPO=apache/incubator-superset \
     SUPERSET_VERSION=${SUPERSET_VERSION} \
     SUPERSET_HOME=/var/lib/superset
-ENV GUNICORN_CMD_ARGS="--workers ${GUNICORN_WORKERS} --timeout ${GUNICORN_TIMEOUT} --bind ${GUNICORN_BIND} --limit-request-line ${GUNICORN_LIMIT_REQUEST_LINE} --limit-request-field_size ${GUNICORN_LIMIT_REQUEST_FIELD_SIZE}"
+ENV GUNICORN_CMD_ARGS="--workers ${GUNICORN_WORKERS} --threads ${GUNICORN_THREADS} --timeout ${GUNICORN_TIMEOUT} --bind ${GUNICORN_BIND} --limit-request-line ${GUNICORN_LIMIT_REQUEST_LINE} --limit-request-field_size ${GUNICORN_LIMIT_REQUEST_FIELD_SIZE}"
 
 # Create superset user & install dependencies
 WORKDIR /tmp/superset
