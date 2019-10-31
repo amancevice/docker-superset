@@ -77,6 +77,7 @@ RUN useradd -U -m superset && \
     apt-get clean && \
     tar xzf superset.tar.gz && \
     pip install dist/*.tar.gz -r requirements.txt -r requirements-db.txt && \
+    pip install pydruid \
     rm -rf ./*
 
 # Configure Filesystem
