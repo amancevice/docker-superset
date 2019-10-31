@@ -9,6 +9,7 @@ mysqlclient==1.4.2
 psycopg2==2.7.6.1
 pyathena==1.5.1
 pybigquery==0.4.10
+pydruid==0.5.7
 pyhive==0.5.1
 pyldap==2.4.28
 pymssql==2.1.4
