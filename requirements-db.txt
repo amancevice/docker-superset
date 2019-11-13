@@ -16,3 +16,4 @@ pymssql==2.1.4
 redis==3.2.1
 sqlalchemy-clickhouse==0.1.5.post0
 sqlalchemy-redshift==0.7.1
+snowflake-sqlalchemy==1.1.16
