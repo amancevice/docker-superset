@@ -14,5 +14,6 @@ pyhive==0.5.1
 pyldap==2.4.28
 pymssql==2.1.4
 redis==3.2.1
+snowflake-sqlalchemy==1.1.16
 sqlalchemy-clickhouse==0.1.5.post0
 sqlalchemy-redshift==0.7.1
