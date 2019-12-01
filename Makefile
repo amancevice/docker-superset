@@ -4,7 +4,7 @@ shells := $(foreach stage,$(stages),shell@$(stage))
 
 node_version     := latest
 python_version   := 3.6
-superset_version := 0.35.0
+superset_version := 0.35.1
 
 .PHONY: all clean demo edge push $(stages) $(shells)
 
