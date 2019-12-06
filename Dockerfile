@@ -55,7 +55,8 @@ ENV GUNICORN_CMD_ARGS="--workers ${GUNICORN_WORKERS} --threads ${GUNICORN_THREAD
 # Create superset user & install dependencies
 WORKDIR /tmp/superset
 COPY --from=dist /tmp/superset.tar.gz .
-RUN useradd -U -m superset && \
+RUN groupadd supergroup && \
+    useradd -U -m -G supergroup superset && \
     mkdir -p /etc/superset && \
     mkdir -p ${SUPERSET_HOME} && \
     chown -R superset:superset /etc/superset && \

@@ -1,3 +1,4 @@
+cx_oracle==7.3.0
 flask-cors==3.0.3
 flask-mail==0.9.1
 flask-oauth==0.12
@@ -10,11 +11,12 @@ psycopg2==2.7.6.1
 pyathena==1.5.1
 pybigquery==0.4.10
 pydruid==0.5.7
-pyhive==0.5.1
+pyhive==0.6.1
 pyldap==2.4.28
 pymssql==2.1.4
 redis==3.2.1
+sasl==0.2.1
 snowflake-sqlalchemy==1.1.16
 sqlalchemy-clickhouse==0.1.5.post0
 sqlalchemy-redshift==0.7.1
-cx_oracle==7.2.3
+thrift-sasl==0.3.0
