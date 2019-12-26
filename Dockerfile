@@ -1,7 +1,9 @@
 ARG NODE_VERSION=latest
 ARG PYTHON_VERSION=3.6
 
+#
 # --- Build assets with NodeJS
+#
 
 FROM node:${NODE_VERSION} AS build
 
@@ -19,7 +21,9 @@ WORKDIR ${SUPERSET_HOME}/superset/assets
 RUN npm install && \
     npm run build
 
+#
 # --- Build dist package with Python 3
+#
 
 FROM python:${PYTHON_VERSION} AS dist
 
@@ -33,7 +37,9 @@ COPY requirements-db.txt .
 RUN python setup.py sdist && \
     tar czfv /tmp/superset.tar.gz requirements.txt requirements-db.txt dist
 
+#
 # --- Install dist package and finalize app
+#
 
 FROM python:${PYTHON_VERSION} AS final
 
