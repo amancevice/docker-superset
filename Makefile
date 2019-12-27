@@ -6,7 +6,7 @@ node_version     := latest
 python_version   := 3.6
 superset_version := 0.35.1
 
-.PHONY: all clean demo edge push $(stages) $(shells)
+.PHONY: all clean clobber demo edge push $(stages) $(shells)
 
 all: latest
 
@@ -42,7 +42,11 @@ all: latest
 	cp $< $@
 
 clean:
-	-docker image rm -f $(shell awk {print} .docker/*)
+	-docker image rm $(shell docker image ls --format '{{.Repository}}:{{.Tag}}' $(image):*-*)
+	-rm -rf .docker/*@*
+
+clobber:
+	-docker image rm -f $(shell docker image ls --quiet $(image))
 	-rm -rf .docker
 
 demo: .docker/$(superset_version)
@@ -56,10 +60,6 @@ demo: .docker/$(superset_version)
 edge: .docker/edge
 
 latest: .docker/latest .docker/$(superset_version)
-
-push: .docker/latest .docker/$(superset_version)
-	docker push $(image):$(superset_version)
-	docker push $(image):latest
 
 $(stages): %: .docker/$(superset_version)@%
 
