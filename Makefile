@@ -1,67 +1,74 @@
-image  := amancevice/superset
-stages := build dist final
-shells := $(foreach stage,$(stages),shell@$(stage))
+IMAGE     := amancevice/superset
+STAGES    := build dist final
+CLEANS    := $(foreach STAGE,$(STAGES),clean@$(STAGE))
+IMAGES    := $(foreach STAGE,$(STAGES),image@$(STAGE))
+SHELLS    := $(foreach STAGE,$(STAGES),shell@$(STAGE))
+TIMESTAMP := $(shell date +%s)
 
-node_version     := latest
-python_version   := 3.6
-superset_version := 0.35.1
+NODE_VERSION     := latest
+PYTHON_VERSION   := 3.6
+SUPERSET_VERSION := 0.35.2
 
-.PHONY: all clean clobber demo edge push $(stages) $(shells)
+.PHONY: all clean clobber edge latest $(IMAGES) $(SHELLS)
 
-all: latest
+default: latest
 
 .docker:
 	mkdir -p $@
 
-.docker/$(superset_version)@dist:  .docker/$(superset_version)@build
-.docker/$(superset_version)@final: .docker/$(superset_version)@dist
-.docker/$(superset_version)@%:   | .docker
+.docker/$(SUPERSET_VERSION)-dist:  .docker/$(SUPERSET_VERSION)-build
+.docker/$(SUPERSET_VERSION)-final: .docker/$(SUPERSET_VERSION)-dist
+.docker/$(SUPERSET_VERSION)-%:   | .docker
 	docker build \
-	--build-arg NODE_VERSION=$(node_version) \
-	--build-arg PYTHON_VERSION=$(python_version) \
-	--build-arg SUPERSET_VERSION=$(superset_version) \
-	--iidfile $@ \
-	--tag $(image):$(superset_version)-$* \
-	--target $* .
+	--build-arg NODE_VERSION=$(NODE_VERSION) \
+	--build-arg PYTHON_VERSION=$(PYTHON_VERSION) \
+	--build-arg SUPERSET_VERSION=$(SUPERSET_VERSION) \
+	--iidfile $@@$(TIMESTAMP) \
+	--tag $(IMAGE):$(SUPERSET_VERSION)-$* \
+	--target $* \
+	.
+	cp $@@$(TIMESTAMP) $@
 
-.docker/edge@dist:  .docker/edge@build
-.docker/edge@final: .docker/edge@dist
-.docker/edge@%:   | .docker
+
+.docker/edge-dist:  .docker/edge-build
+.docker/edge-final: .docker/edge-dist
+.docker/edge-%:   | .docker
 	docker build \
-	--build-arg NODE_VERSION=$(node_version) \
-	--build-arg PYTHON_VERSION=$(python_version) \
+	--build-arg NODE_VERSION=$(NODE_VERSION) \
+	--build-arg PYTHON_VERSION=$(PYTHON_VERSION) \
 	--build-arg SUPERSET_VERSION=master \
-	--iidfile $@ \
-	--tag $(image):edge-$* \
-	--target $* .
+	--iidfile $@@$(TIMESTAMP) \
+	--tag $(IMAGE):edge-$* \
+	--target $* \
+	.
+	cp $@@$(TIMESTAMP) $@
 
-.docker/edge: .docker/edge@final
-.docker/latest .docker/$(superset_version): .docker/$(superset_version)@final
+.docker/edge: .docker/edge-final
+.docker/latest .docker/$(SUPERSET_VERSION): .docker/$(SUPERSET_VERSION)-final
 .docker/%:
-	docker tag $(shell cat $<) $(image):$*
+	docker tag $(shell cat $<) $(IMAGE):$*
 	cp $< $@
 
 clean:
-	-docker image rm $(shell docker image ls --format '{{.Repository}}:{{.Tag}}' $(image):*-*)
-	-rm -rf .docker/*@*
+	-find .docker -name '$(SUPERSET_VERSION)-*' -not -name '*@*' | xargs rm
 
 clobber:
-	-docker image rm -f $(shell docker image ls --quiet $(image))
+	-awk {print} .docker/* 2> /dev/null | uniq | xargs docker image rm --force
 	-rm -rf .docker
 
-demo: .docker/$(superset_version)
+demo: .docker/$(SUPERSET_VERSION)
 	docker run --detach \
-	--name superset-$(superset_version) \
+	--name superset-$(SUPERSET_VERSION) \
 	--publish 8088:8088 \
 	$(shell cat $<)
-	docker exec -it superset-$(superset_version) superset-demo
-	docker logs -f superset-$(superset_version)
+	docker exec -it superset-$(SUPERSET_VERSION) superset-demo
+	docker logs -f superset-$(SUPERSET_VERSION)
 
 edge: .docker/edge
 
-latest: .docker/latest .docker/$(superset_version)
+latest: .docker/latest .docker/$(SUPERSET_VERSION)
 
-$(stages): %: .docker/$(superset_version)@%
+$(IMAGES): image@%: .docker/$(SUPERSET_VERSION)-%
 
-$(shells): shell@%: .docker/$(superset_version)@%
+$(SHELLS): shell@%: .docker/$(SUPERSET_VERSION)-%
 	docker run --rm -it --entrypoint /bin/bash $(shell cat $<)
