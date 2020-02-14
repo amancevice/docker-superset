@@ -4,6 +4,24 @@ Docker image for [Superset](https://github.com/ApacheInfra/superset).
 
 This project is unofficial and not related to Superset or Apache.
 
+## Download
+
+Download this image from the Docker registry:
+
+```bash
+docker pull amancevice/superset:<version>
+```
+
+## Building
+
+*I do not recommend building this image on your own. Instead, try pulling a tag from the Docker registry.*
+
+If you insist on building an image from the source, use the `make` to supervise the build.
+
+```bash
+make [ SUPERSET_VERSION=<version> ]
+```
+
 ## Issues
 
 Please **only** file issues in this project that are related to Docker and **do** include the Docker commands or compose configuration of your setup when filing issues (be sure to hide any secrets/passwords before submitting).
@@ -46,7 +64,6 @@ After starting the Superset server, initialize the database with an admin user a
 docker run --detach --name superset [options] amancevice/superset
 docker exec -it superset superset-init
 ```
-
 
 ## Upgrading
 
