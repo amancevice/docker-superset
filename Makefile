@@ -9,7 +9,7 @@ NODE_VERSION     := latest
 PYTHON_VERSION   := 3.6
 SUPERSET_VERSION := 0.35.2
 
-.PHONY: all clean clobber edge latest push $(IMAGES) $(SHELLS)
+.PHONY: default clean clobber edge latest push $(IMAGES) $(SHELLS)
 
 default: latest
 
