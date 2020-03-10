@@ -34,7 +34,6 @@ COPY --from=build ${SUPERSET_HOME} .
 COPY requirements-db.txt .
 
 # Create package to install
-RUN echo 'include superset-frontend/package.json' >> MANIFEST.in
 RUN python setup.py sdist
 RUN tar czfv /tmp/superset.tar.gz requirements.txt requirements-db.txt dist
 
