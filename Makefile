@@ -5,7 +5,7 @@ IMAGES    := $(foreach STAGE,$(STAGES),image@$(STAGE))
 SHELLS    := $(foreach STAGE,$(STAGES),shell@$(STAGE))
 TIMESTAMP := $(shell date +%s)
 
-NODE_VERSION     := latest
+NODE_VERSION     := 12
 PYTHON_VERSION   := 3.6
 SUPERSET_VERSION := 0.35.2
 
