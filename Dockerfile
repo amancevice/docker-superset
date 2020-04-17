@@ -1,4 +1,4 @@
-ARG NODE_VERSION=latest
+ARG NODE_VERSION=12
 ARG PYTHON_VERSION=3.6
 
 #
@@ -13,13 +13,13 @@ ENV SUPERSET_HOME=/var/lib/superset/
 
 # Download source
 WORKDIR ${SUPERSET_HOME}
-RUN wget -O /tmp/superset.tar.gz https://github.com/apache/incubator-superset/archive/${SUPERSET_VERSION}.tar.gz && \
-    tar xzf /tmp/superset.tar.gz -C ${SUPERSET_HOME} --strip-components=1
+RUN wget -qO /tmp/superset.tar.gz https://github.com/apache/incubator-superset/archive/${SUPERSET_VERSION}.tar.gz
+RUN tar xzf /tmp/superset.tar.gz -C ${SUPERSET_HOME} --strip-components=1
 
 # Build assets
-WORKDIR ${SUPERSET_HOME}/superset/assets
-RUN npm install && \
-    npm run build
+WORKDIR ${SUPERSET_HOME}/superset-frontend/
+RUN npm install
+RUN npm run build
 
 #
 # --- Build dist package with Python 3
@@ -34,8 +34,8 @@ COPY --from=build ${SUPERSET_HOME} .
 COPY requirements-db.txt .
 
 # Create package to install
-RUN python setup.py sdist && \
-    tar czfv /tmp/superset.tar.gz requirements.txt requirements-db.txt dist
+RUN python setup.py sdist
+RUN tar czfv /tmp/superset.tar.gz requirements.txt requirements-db.txt dist
 
 #
 # --- Install dist package and finalize app
