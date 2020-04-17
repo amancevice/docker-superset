@@ -18,8 +18,8 @@ RUN tar xzf /tmp/superset.tar.gz -C ${SUPERSET_HOME} --strip-components=1
 
 # Build assets
 WORKDIR ${SUPERSET_HOME}/superset-frontend/
-RUN npm install 2>&1
-RUN npm run build 2>&1
+RUN npm install
+RUN npm run build
 
 #
 # --- Build dist package with Python 3

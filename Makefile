@@ -1,60 +1,52 @@
-IMAGE     := amancevice/superset
-STAGES    := build dist final
-CLEANS    := $(foreach STAGE,$(STAGES),clean@$(STAGE))
-IMAGES    := $(foreach STAGE,$(STAGES),image@$(STAGE))
-SHELLS    := $(foreach STAGE,$(STAGES),shell@$(STAGE))
-TIMESTAMP := $(shell date +%s)
-
+REPO             := amancevice/superset
+STAGES           := build dist final
 NODE_VERSION     := 12
 PYTHON_VERSION   := 3.6
 SUPERSET_VERSION := 0.36.0
 
-.PHONY: default clean clobber edge latest push $(IMAGES) $(SHELLS)
+.PHONY: default clean clobber edge latest push
 
 default: latest
 
 .docker:
 	mkdir -p $@
 
-.docker/$(SUPERSET_VERSION)-dist:  .docker/$(SUPERSET_VERSION)-build
+.docker/$(SUPERSET_VERSION)-dist: .docker/$(SUPERSET_VERSION)-build
 .docker/$(SUPERSET_VERSION)-final: .docker/$(SUPERSET_VERSION)-dist
-.docker/$(SUPERSET_VERSION)-%:   | .docker
+.docker/$(SUPERSET_VERSION)-%: | .docker
 	docker build \
 	--build-arg NODE_VERSION=$(NODE_VERSION) \
 	--build-arg PYTHON_VERSION=$(PYTHON_VERSION) \
 	--build-arg SUPERSET_VERSION=$(SUPERSET_VERSION) \
-	--iidfile $@@$(TIMESTAMP) \
-	--tag $(IMAGE):$(SUPERSET_VERSION)-$* \
+	--iidfile $@ \
+	--tag $(REPO):$(SUPERSET_VERSION)-$* \
 	--target $* \
 	.
-	cp $@@$(TIMESTAMP) $@
 
 
-.docker/edge-dist:  .docker/edge-build
+.docker/edge-dist: .docker/edge-build
 .docker/edge-final: .docker/edge-dist
-.docker/edge-%:   | .docker
+.docker/edge-%: | .docker
 	docker build \
 	--build-arg NODE_VERSION=$(NODE_VERSION) \
 	--build-arg PYTHON_VERSION=$(PYTHON_VERSION) \
 	--build-arg SUPERSET_VERSION=master \
-	--iidfile $@@$(TIMESTAMP) \
-	--tag $(IMAGE):edge-$* \
+	--iidfile $@ \
+	--tag $(REPO):edge-$* \
 	--target $* \
 	.
-	cp $@@$(TIMESTAMP) $@
 
 .docker/edge: .docker/edge-final
 .docker/latest .docker/$(SUPERSET_VERSION): .docker/$(SUPERSET_VERSION)-final
 .docker/%:
-	docker tag $(shell cat $<) $(IMAGE):$*
+	docker tag $(shell cat $<) $(REPO):$*
 	cp $< $@
 
 clean:
-	-find .docker -name '$(SUPERSET_VERSION)-*' -not -name '*@*' | xargs rm
+	rm -rf .docker
 
-clobber:
-	-awk {print} .docker/* 2> /dev/null | uniq | xargs docker image rm --force
-	-rm -rf .docker
+clobber: clean
+	docker image ls $(REPO) --quiet | uniq | xargs docker image rm --force
 
 demo: .docker/$(SUPERSET_VERSION)
 	docker run --detach \
@@ -69,11 +61,6 @@ edge: .docker/edge
 latest: .docker/latest .docker/$(SUPERSET_VERSION)
 
 push:
-	-docker push $(IMAGE):$(SUPERSET_VERSION)
-	-docker push $(IMAGE):latest
-	-docker push $(IMAGE):edge
-
-$(IMAGES): image@%: .docker/$(SUPERSET_VERSION)-%
-
-$(SHELLS): shell@%: .docker/$(SUPERSET_VERSION)-%
-	docker run --rm -it --entrypoint /bin/bash $(shell cat $<)
+	-docker push $(REPO):$(SUPERSET_VERSION)
+	-docker push $(REPO):latest
+	-docker push $(REPO):edge
