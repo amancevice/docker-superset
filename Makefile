@@ -39,7 +39,7 @@ default: latest
 .docker/edge: .docker/edge-final
 .docker/latest .docker/$(SUPERSET_VERSION): .docker/$(SUPERSET_VERSION)-final
 .docker/%:
-	docker tag $(shell cat $<) $(REPO):$*
+	docker tag $$(cat $<) $(REPO):$*
 	cp $< $@
 
 clean:
@@ -52,7 +52,7 @@ demo: .docker/$(SUPERSET_VERSION)
 	docker run --detach \
 	--name superset-$(SUPERSET_VERSION) \
 	--publish 8088:8088 \
-	$(shell cat $<)
+	$$(cat $<)
 	docker exec -it superset-$(SUPERSET_VERSION) superset-demo
 	docker logs -f superset-$(SUPERSET_VERSION)
 
