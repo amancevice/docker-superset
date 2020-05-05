@@ -1,5 +1,8 @@
 # Superset
 
+[![latest](https://github.com/amancevice/docker-superset/workflows/latest/badge.svg)](https://github.com/amancevice/docker-superset/actions)
+[![edge](https://github.com/amancevice/docker-superset/workflows/edge/badge.svg)](https://github.com/amancevice/docker-superset/actions)
+
 Docker image for [Superset](https://github.com/ApacheInfra/superset).
 
 This project is unofficial and not related to Superset or Apache.
