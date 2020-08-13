@@ -18,21 +18,24 @@ docker pull amancevice/superset:<version>
 
 ## Building
 
-*I do not recommend building this image on your own. Instead, try pulling a tag from the Docker registry.*
+I **DO NOT** recommend building this image directly from the Dockerfile included in this repository.
 
-If you insist on building an image from the source, use the `make` to supervise the build.
+If you wish to extend this image then the best course of action is to write your own Dockerfile that extends this image. Eg,
 
-```bash
-make [ SUPERSET_VERSION=<version> ]
+```Dockerfile
+FROM amancevice/superset:<version>
+USER root
+# Your changes...
+USER superset
 ```
 
 ## Issues
 
-Please **only** file issues in this project that are related to Docker and **do** include the Docker commands or compose configuration of your setup when filing issues (be sure to hide any secrets/passwords before submitting).
+Please **ONLY** file issues in this project that are related to Docker and **DO** include the Docker commands or compose configuration of your setup when filing issues (be sure to hide any secrets/passwords before submitting).
 
 File issues/bugs with Superset at the [source](https://github.com/apache/incubator-superset/issues).
 
-Please **do not** files issues like "Please include `<some-python-pip>` in the Dockerfile," open a [pull request](https://github.com/amancevice/superset/pulls) for updates/enhancements.
+Please **DO NOT** files issues like "Please include `<some-python-pip>` in the Dockerfile," open a [pull request](https://github.com/amancevice/superset/pulls) for updates/enhancements.
 
 
 ## Examples
