@@ -2,7 +2,7 @@ REPO             := amancevice/superset
 STAGES           := build dist final
 NODE_VERSION     := 12
 PYTHON_VERSION   := 3.6
-SUPERSET_VERSION := 0.37.0rc2
+SUPERSET_VERSION := 0.37.0rc4
 
 .PHONY: default clean clobber edge latest push
 
@@ -22,7 +22,6 @@ default: latest
 	--tag $(REPO):$(SUPERSET_VERSION)-$* \
 	--target $* \
 	.
-
 
 .docker/edge-dist: .docker/edge-build
 .docker/edge-final: .docker/edge-dist
