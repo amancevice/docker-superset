@@ -31,11 +31,11 @@ FROM python:${PYTHON_VERSION} AS dist
 ENV SUPERSET_HOME=/var/lib/superset/
 WORKDIR ${SUPERSET_HOME}
 COPY --from=build ${SUPERSET_HOME} .
-COPY requirements-db.txt .
+COPY requirements.txt .
 
 # Create package to install
 RUN python setup.py sdist
-RUN tar czfv /tmp/superset.tar.gz requirements-db.txt dist
+RUN tar czfv /tmp/superset.tar.gz requirements.txt dist
 
 #
 # --- Install dist package and finalize app
@@ -84,7 +84,7 @@ RUN groupadd supergroup && \
         libssl1.0 && \
     apt-get clean && \
     tar xzf superset.tar.gz && \
-    pip install dist/*.tar.gz -r requirements-db.txt && \
+    pip install dist/*.tar.gz -r requirements.txt && \
     rm -rf ./*
 
 # Configure Filesystem
