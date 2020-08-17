@@ -1,6 +1,5 @@
 name: edge
 on:
-  pull_request:
   push:
   schedule:
     - cron: '11 21 * * *'
