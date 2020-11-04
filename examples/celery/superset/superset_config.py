@@ -1,6 +1,6 @@
 import os
 
-from werkzeug.contrib.cache import RedisCache
+from cachelib import RedisCache
 
 
 MAPBOX_API_KEY = os.getenv('MAPBOX_API_KEY', '')
