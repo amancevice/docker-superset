@@ -1,5 +1,5 @@
 ARG NODE_VERSION=12
-ARG PYTHON_VERSION=3.6
+ARG PYTHON_VERSION=3.8
 
 #
 # --- Build assets with NodeJS
@@ -88,6 +88,7 @@ RUN groupadd supergroup && \
         libssl1.0 && \
     apt-get clean && \
     tar xzf superset.tar.gz && \
+    pip install Cython==0.29.21 && \
     pip install dist/*.tar.gz -r requirements.txt && \
     rm -rf ./*
 
