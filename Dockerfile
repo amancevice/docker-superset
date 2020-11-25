@@ -85,7 +85,7 @@ RUN groupadd supergroup && \
         libsasl2-2 \
         libsasl2-dev \
         libsasl2-modules-gssapi-mit \
-        libssl1.0 && \
+        libssl-dev && \
     apt-get clean && \
     tar xzf superset.tar.gz && \
     pip install Cython==0.29.21 && \
