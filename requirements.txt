@@ -5,7 +5,7 @@ flask-cors==3.0.3
 flask-mail==0.9.1
 flask-oauth==0.12
 flask_oauthlib==0.9.5
-gevent==1.4.0
+gevent==20.9.0
 impyla==0.14.0
 infi.clickhouse-orm==1.0.2
 mysqlclient==1.4.2
