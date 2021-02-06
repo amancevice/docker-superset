@@ -13,7 +13,7 @@ ENV SUPERSET_HOME=/var/lib/superset/
 
 # Download source
 WORKDIR ${SUPERSET_HOME}
-RUN wget -qO /tmp/superset.tar.gz https://github.com/apache/incubator-superset/archive/${SUPERSET_VERSION}.tar.gz
+RUN wget -qO /tmp/superset.tar.gz https://github.com/apache/superset/archive/${SUPERSET_VERSION}.tar.gz
 RUN tar xzf /tmp/superset.tar.gz -C ${SUPERSET_HOME} --strip-components=1
 
 # Build assets
@@ -56,7 +56,7 @@ ENV GUNICORN_BIND=0.0.0.0:8088 \
     LANG=C.UTF-8 \
     LC_ALL=C.UTF-8 \
     PYTHONPATH=/etc/superset:/home/superset:$PYTHONPATH \
-    SUPERSET_REPO=apache/incubator-superset \
+    SUPERSET_REPO=apache/superset \
     SUPERSET_VERSION=${SUPERSET_VERSION} \
     SUPERSET_HOME=/var/lib/superset
 ENV GUNICORN_CMD_ARGS="--bind ${GUNICORN_BIND} --limit-request-field_size ${GUNICORN_LIMIT_REQUEST_FIELD_SIZE} --limit-request-line ${GUNICORN_LIMIT_REQUEST_LINE} --threads ${GUNICORN_THREADS} --timeout ${GUNICORN_TIMEOUT} --workers ${GUNICORN_WORKERS} --worker-class ${GUNICORN_WORKER_CLASS}"

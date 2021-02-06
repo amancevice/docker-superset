@@ -33,7 +33,7 @@ USER superset
 
 Please **ONLY** file issues in this project that are related to Docker and **DO** include the Docker commands or compose configuration of your setup when filing issues (be sure to hide any secrets/passwords before submitting).
 
-File issues/bugs with Superset at the [source](https://github.com/apache/incubator-superset/issues).
+File issues/bugs with Superset at the [source](https://github.com/apache/superset).
 
 Please **DO NOT** files issues like "Please include `<some-python-pip>` in the Dockerfile," open a [pull request](https://github.com/amancevice/superset/pulls) for updates/enhancements.
 
