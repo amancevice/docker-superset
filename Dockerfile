@@ -87,7 +87,7 @@ RUN groupadd supergroup && \
         libssl-dev && \
     apt-get clean && \
     tar xzf superset.tar.gz && \
-    pip install Cython==0.29.21 && \
+    pip install Cython==0.29.21 pystan==2.19.1.1 && \
     pip install dist/*.tar.gz -r requirements.txt && \
     rm -rf ./*
 
