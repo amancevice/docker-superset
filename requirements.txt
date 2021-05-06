@@ -2,7 +2,7 @@ authlib==0.14.3
 cx_oracle==7.3.0
 elasticsearch-dbapi==0.1.2
 fbprophet==0.7.1
-flask-cors==3.0.3
+flask-cors==3.0.9
 flask-mail==0.9.1
 flask-oauth==0.12
 flask_oauthlib==0.9.5
