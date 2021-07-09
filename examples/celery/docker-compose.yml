@@ -37,6 +37,11 @@ services:
     volumes:
       - ./superset:/etc/superset
     command: "celery worker --app=superset.tasks.celery_app:app"
+    healthcheck:
+      test: curl -f http://superset:8088/health || exit 1
+      interval: 1m
+      timeout: 10s
+      retries: 3    
 volumes:
   postgres:
   redis:
