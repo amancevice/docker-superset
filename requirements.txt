@@ -11,7 +11,7 @@ gevent==20.9.0
 impyla==0.14.0
 infi.clickhouse-orm==1.0.2
 mysqlclient==1.4.2
-pillow==8.2.0
+pillow==8.3.2
 psycopg2==2.8.6
 pyathena==1.5.1
 pybigquery==0.4.13
