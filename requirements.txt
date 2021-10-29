@@ -2,7 +2,6 @@ authlib==0.14.3
 clickhouse-sqlalchemy==0.1.6
 cx_oracle==7.3.0
 elasticsearch-dbapi==0.1.2
-fbprophet==0.7.1
 flask-cors==3.0.9
 flask-mail==0.9.1
 flask-oauth==0.12
@@ -12,6 +11,7 @@ impyla==0.14.0
 infi.clickhouse-orm==1.0.2
 mysqlclient==1.4.2
 pillow==8.3.2
+prophet==1.0.1
 psycopg2==2.8.6
 pyathena==1.5.1
 pybigquery==0.4.13
