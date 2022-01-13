@@ -10,7 +10,7 @@ gevent==20.9.0
 impyla==0.14.0
 infi.clickhouse-orm==1.0.2
 mysqlclient==1.4.2
-pillow==8.3.2
+pillow==9.0.0
 prophet==1.0.1
 psycopg2==2.8.6
 pyathena==1.5.1
