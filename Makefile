@@ -2,7 +2,7 @@ REPO             := amancevice/superset
 STAGES           := build dist final
 NODE_VERSION     := 16
 PYTHON_VERSION   := 3.8
-SUPERSET_VERSION := 1.4.0
+SUPERSET_VERSION := 1.4.1
 
 .PHONY: default clean clobber edge latest push
 
