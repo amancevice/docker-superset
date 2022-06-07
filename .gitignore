@@ -1,3 +1,3 @@
 **/.docker/
 **/.env
-requirements.txt
+requirements*.txt

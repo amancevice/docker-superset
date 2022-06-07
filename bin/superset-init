@@ -3,7 +3,7 @@
 set -e
 
 # Create an admin user
-FLASK_APP=superset flask fab create-admin $@
+flask fab create-admin $@
 
 # Initialize the database
 superset db upgrade
