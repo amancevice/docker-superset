@@ -25,3 +25,4 @@ snowflake-sqlalchemy==1.2.1
 sqlalchemy-redshift==0.7.1
 sqlalchemy-trino==0.3.0
 thrift-sasl==0.3.0
+markupsafe==2.0.1
