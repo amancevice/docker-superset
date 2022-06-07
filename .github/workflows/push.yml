@@ -16,8 +16,13 @@ jobs:
     needs: lint
     steps:
       - uses: actions/checkout@v2
-      - uses: docker/login-action@v1
+      - uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - run: make latest push
+      - uses: actions/setup-python@v3
+        with:
+          python-version: "3.8"
+      - run: pip install pipenv
+      - run: make build
+      - run: make push
