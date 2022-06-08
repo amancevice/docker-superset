@@ -1,6 +1,6 @@
 REPO             := amancevice/superset
 PYTHON_VERSION   := 3.8
-SUPERSET_VERSION := 1.5.0
+SUPERSET_VERSION := 1.5.1
 
 build: requirements-dev.txt
 	docker build \
