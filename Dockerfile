@@ -28,6 +28,7 @@ WORKDIR /home/superset
 COPY requirements*.txt ./
 RUN groupadd supergroup && \
     useradd -U -G supergroup superset && \
+    chown superset:superset /home/superset && \
     mkdir -p /etc/superset && \
     mkdir -p $SUPERSET_HOME && \
     chown -R superset:superset /etc/superset && \
