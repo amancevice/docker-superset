@@ -41,6 +41,7 @@ RUN groupadd supergroup && \
         freetds-bin \
         freetds-dev \
         libaio1 \
+        libecpg-dev \
         libffi-dev \
         libldap2-dev \
         libpq-dev \
