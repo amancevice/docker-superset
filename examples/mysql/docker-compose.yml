@@ -1,11 +1,6 @@
 version: '3'
 services:
-  redis:
-    image: redis
-    restart: always
-    volumes:
-      - redis:/data
-  mysql:
+  db:
     command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
     image: mysql:5
     restart: always
@@ -16,11 +11,16 @@ services:
       MYSQL_USER: superset
     volumes:
       - mysql:/var/lib/mysql
+  redis:
+    image: redis
+    restart: always
+    volumes:
+      - redis:/data
   superset:
     image: amancevice/superset
     restart: always
     depends_on:
-      - mysql
+      - db
       - redis
     environment:
       MAPBOX_API_KEY: ${MAPBOX_API_KEY}
