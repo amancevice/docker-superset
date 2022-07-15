@@ -1,6 +1,6 @@
 REPO             := amancevice/superset
 PYTHON_VERSION   := 3.8
-SUPERSET_VERSION := 1.5.1
+SUPERSET_VERSION := 2.0.0
 
 build: requirements-dev.txt
 	docker build \
@@ -24,7 +24,7 @@ edge: requirements-dev.txt
 push:
 	docker push --all-tags $(REPO)
 
-.PHONY: build clean edge push
+.PHONY: build clean demo edge push
 
 requirements-dev.txt: requirements.txt
 	pipenv requirements --dev > $@
