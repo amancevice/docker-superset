@@ -6,7 +6,7 @@ FROM python:$PYTHON_VERSION
 # Configure environment
 # superset recommended defaults: https://superset.apache.org/docs/installation/configuring-superset#running-on-a-wsgi-http-server
 # gunicorn recommended defaults: https://docs.gunicorn.org/en/0.17.2/configure.html#security
-ARG SUPERSET_VERSION=1.5.1
+ARG SUPERSET_VERSION=2.0.0
 ENV FLASK_APP=superset
 ENV GUNICORN_BIND=0.0.0.0:8088
 ENV GUNICORN_LIMIT_REQUEST_FIELD_SIZE=8190
