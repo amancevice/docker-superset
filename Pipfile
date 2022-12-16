@@ -40,6 +40,7 @@ sqlalchemy-trino = "==0.3.0"
 thrift-sasl = "==0.3.0"
 werkzeug = "==2.0.3"
 wtforms = "==2.3.3"
+openpyxl = "==3.0.10"
 
 [requires]
 python_version = "3.8"
