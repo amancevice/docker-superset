@@ -1,8 +1,8 @@
 # Superset
 
 ![version](https://img.shields.io/docker/v/amancevice/superset?color=blue&label=version&logo=docker&logoColor=eee&sort=semver&style=flat-square)
-[![latest](https://img.shields.io/github/workflow/status/amancevice/docker-superset/latest?label=latest&logo=github&style=flat-square)](https://github.com/amancevice/docker-superset/actions)
-[![edge](https://img.shields.io/github/workflow/status/amancevice/docker-superset/edge?label=edge&logo=github&style=flat-square)](https://github.com/amancevice/docker-superset/actions)
+[![latest](https://img.shields.io/github/actions/workflow/status/amancevice/docker-superset/latest.yml?branch=main&label=latest&logo=github&style=flat-square)](https://github.com/amancevice/docker-superset/actions/workflows/latest.yml)
+[![edge](https://img.shields.io/github/actions/workflow/status/amancevice/docker-superset/edge.yml?branch=main&label=edge&logo=github&style=flat-square)](https://github.com/amancevice/docker-superset/actions/workflows/edge.yml)
 
 Docker image for [Superset](https://github.com/ApacheInfra/superset).
 
