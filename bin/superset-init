@@ -1,6 +1,5 @@
 #!/bin/bash
-
-set -e
+set -eo pipefail
 
 # Create an admin user
 flask fab create-admin $@
