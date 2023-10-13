@@ -1,6 +1,8 @@
 name: latest
 on:
   push:
+    branches:
+      - main
 jobs:
   lint:
     runs-on: ubuntu-latest
@@ -14,8 +16,8 @@ jobs:
     needs: lint
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-python@v4
+      - uses: docker/setup-qemu-action@v3
+      - uses: docker/setup-buildx-action@v3
+      - uses: docker/build-push-action@v5
         with:
-          python-version: "3.8"
-      - run: pip install pipenv
-      - run: make build
+          platforms: linux/amd64
