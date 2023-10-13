@@ -13,14 +13,6 @@ clean:
 	pipenv --rm
 	docker image ls --quiet $(REPO) | uniq | xargs docker image rm --force
 
-edge: requirements-dev.txt
-	docker build \
-	--build-arg PYTHON_VERSION=$(PYTHON_VERSION) \
-	--build-arg SUPERSET_VERSION=master \
-	--file Dockerfile.edge \
-	--tag $(REPO):edge \
-	.
-
 push:
 	docker push --all-tags $(REPO)
 
