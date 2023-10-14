@@ -25,11 +25,12 @@ jobs:
       - name: meta
         id: meta
         run: |
-          version="$(jq -r '.default."apache-superset".version' Pipfile.lock | grep -Eo '[0-9.]+')"
+          version="$(grep apache-superset Pipfile | grep -Eo '[0-9.]+')"
           tags="amancevice/superset,amancevice/superset:$version"
-          echo "tags=$tags" >> $GITHUB_OUTPUTS
+          echo "tags=$tags" >> "$GITHUB_OUTPUT"
       - uses: docker/build-push-action@v5
         with:
           platforms: linux/amd64
           push: true
-          tags: ${{ steps.meta.outputs.tags }}
+          tags: |
+            ${{ steps.meta.outputs.tags }}
