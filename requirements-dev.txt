@@ -15,7 +15,7 @@ click==8.1.7; python_version >= '3.7'
 clickhouse-cityhash==1.0.2.4
 clickhouse-driver==0.2.6; python_version >= '3.7' and python_version < '4'
 clickhouse-sqlalchemy==0.2.4; python_version >= '3.7' and python_version < '4'
-cryptography==39.0.2; python_version >= '3.6'
+cryptography==41.0.6; python_version >= '3.6'
 cx-oracle==8.3.0
 et-xmlfile==1.1.0; python_version >= '3.6'
 flask==2.3.3; python_version >= '3.8'
