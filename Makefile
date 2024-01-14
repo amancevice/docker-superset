@@ -1,9 +1,10 @@
 REPO             := amancevice/superset
-PYTHON_VERSION   := $(shell python --version | grep -Eo '[0-9.]+')
+PYTHON_VERSION   := $(shell cat .python-version)
 SUPERSET_VERSION := $(shell grep apache-superset Pipfile | grep -Eo '[0-9.]+')
 
 build: requirements-dev.txt
 	docker buildx build \
+	--build-arg PYTHON_VERSION=$(PYTHON_VERSION)
 	--platform linux/amd64 \
 	--tag $(REPO) \
 	--tag $(REPO):$(SUPERSET_VERSION) \
@@ -27,8 +28,8 @@ requirements.txt: Pipfile.lock
 Pipfile.lock: Pipfile | .venv
 	pipenv lock
 
-.venv:
-	rm -rf $@
+.venv: .python-version
+	pipenv --rm
 	mkdir -p $@
 	pipenv --python $(PYTHON_VERSION)
 	touch $@

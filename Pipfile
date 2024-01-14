@@ -39,6 +39,3 @@ sqlalchemy-bigquery = "==1.8.0"
 sqlalchemy-redshift = "==0.8.14"
 sqlalchemy-trino = "==0.5.0"
 thrift-sasl = "==0.4.3"
-
-[requires]
-python_version = "3.9"
