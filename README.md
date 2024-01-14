@@ -2,7 +2,6 @@
 
 ![version](https://img.shields.io/docker/v/amancevice/superset?color=blue&label=version&logo=docker&logoColor=eee&sort=semver&style=flat-square)
 [![latest](https://img.shields.io/github/actions/workflow/status/amancevice/docker-superset/latest.yml?branch=main&label=latest&logo=github&style=flat-square)](https://github.com/amancevice/docker-superset/actions/workflows/latest.yml)
-[![edge](https://img.shields.io/github/actions/workflow/status/amancevice/docker-superset/edge.yml?branch=main&label=edge&logo=github&style=flat-square)](https://github.com/amancevice/docker-superset/actions/workflows/edge.yml)
 
 Docker image for [Superset](https://github.com/ApacheInfra/superset).
 
@@ -37,23 +36,19 @@ File issues/bugs with Superset at the [source](https://github.com/apache/superse
 
 Please **DO NOT** files issues like "Please include `<some-python-pip>` in the Dockerfile," open a [pull request](https://github.com/amancevice/superset/pulls) for updates/enhancements.
 
-
 ## Examples
 
 Navigate to the [`examples`](./examples) directory to view examples of how to configure Superset with MySQL, PostgreSQL, or SQLite.
 
-
 ## Versions
 
 This repo is tagged in parallel with superset. Pulling `amancevice/superset:0.18.5` will fetch the image of this repository running superset version `0.18.5`. It is possible that the `latest` tag includes new features/support libraries but will usually be in sync with the latest semantic version.
-
 
 ## Configuration
 
 Follow the [instructions](https://superset.incubator.apache.org/installation.html#configuration) provided by Apache Superset for writing your own `superset_config.py`. Place this file in a local directory and mount this directory to `/etc/superset` inside the container. This location is included in the image's `PYTHONPATH`. Mounting this file to a different location is possible, but it will need to be in the `PYTHONPATH`.
 
 View the contents of the [`examples`](./examples) directory to see some simple `superset_config.py` samples.
-
 
 ## Volumes
 

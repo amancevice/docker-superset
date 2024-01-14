@@ -16,7 +16,7 @@ clean:
 push:
 	docker push --all-tags $(REPO)
 
-.PHONY: build clean demo edge push
+.PHONY: build clean demo push
 
 requirements-dev.txt: requirements.txt
 	pipenv requirements --dev > $@
