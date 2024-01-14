@@ -162,7 +162,7 @@ pgsanity==0.2.9
 polyline==2.0.1; python_version >= '3.7'
 prison==0.2.1
 prompt-toolkit==3.0.39; python_full_version >= '3.7.0'
-pyarrow==12.0.1; python_version >= '3.7'
+pyarrow==14.0.1; python_version >= '3.7'
 pygments==2.16.1; python_version >= '3.7'
 pyjwt==2.8.0; python_version >= '3.7'
 pymeeus==0.5.12
