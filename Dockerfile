@@ -56,9 +56,9 @@ RUN groupadd supergroup && \
     pip install -U pip
 
 # Install pips
-RUN pip install pystan==3.7.0
-COPY requirements*.txt ./
+COPY requirements.txt ./
 RUN pip install -r requirements.txt
+COPY requirements-dev.txt ./
 RUN pip install -r requirements-dev.txt
 
 # Configure application
