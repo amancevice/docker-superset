@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - main
+      - multiarch
 jobs:
   lint:
     runs-on: ubuntu-latest
@@ -20,4 +21,6 @@ jobs:
       - uses: docker/setup-buildx-action@v3
       - uses: docker/build-push-action@v5
         with:
-          platforms: linux/amd64
+          platforms: |
+            linux/amd64
+            linux/arm64
