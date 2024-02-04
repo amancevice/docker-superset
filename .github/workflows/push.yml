@@ -7,8 +7,8 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
       - run: npm install -g dockerlint
       - run: dockerlint
   build-push:
@@ -30,7 +30,9 @@ jobs:
           echo "tags=$tags" >> "$GITHUB_OUTPUT"
       - uses: docker/build-push-action@v5
         with:
-          platforms: linux/amd64
+          platforms: |
+            linux/amd64
+            linux/arm64
           push: true
           tags: |
             ${{ steps.meta.outputs.tags }}
