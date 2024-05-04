@@ -1,6 +1,4 @@
-ARG NODE_VERSION=16
-ARG PYTHON_VERSION=3.10
-
+ARG PYTHON_VERSION=3.11
 FROM python:$PYTHON_VERSION
 
 # Configure environment
@@ -56,10 +54,9 @@ RUN groupadd supergroup && \
     pip install -U pip
 
 # Install pips
-COPY requirements.txt ./
-RUN pip install -r requirements.txt
-COPY requirements-dev.txt ./
-RUN pip install -r requirements-dev.txt
+COPY requirements*.txt ./
+RUN pip install -r requirements.txt && \
+    pip install -r requirements-dev.txt
 
 # Configure application
 EXPOSE 8088
