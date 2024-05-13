@@ -30,7 +30,7 @@ Pipfile.lock: Pipfile | .venv
 	pipenv lock
 
 .venv: .python-version
-	pipenv --rm
+	-pipenv --rm
 	mkdir -p $@
 	pipenv --python $(PYTHON_VERSION)
 	touch $@
