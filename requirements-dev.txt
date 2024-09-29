@@ -16,11 +16,9 @@ clickhouse-driver==0.2.9; python_version >= '3.7' and python_version < '4'
 clickhouse-sqlalchemy==0.2.4; python_version >= '3.7' and python_version < '4'
 cmdstanpy==1.2.4; python_version >= '3.8'
 contourpy==1.3.0; python_version >= '3.9'
-convertdate==2.4.0; python_version >= '3.7' and python_version < '4'
 cryptography==42.0.8; python_version >= '3.7'
 cx-oracle==8.3.0
 cycler==0.12.1; python_version >= '3.8'
-ephem==4.1.5
 et-xmlfile==1.1.0; python_version >= '3.6'
 flask==2.3.3; python_version >= '3.8'
 flask-cors==4.0.2
@@ -44,6 +42,7 @@ grpcio-status==1.66.2
 holidays==0.25; python_version >= '3.7'
 httplib2==0.22.0; python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3'
 idna==3.10; python_version >= '3.6'
+importlib-resources==6.4.5; python_version >= '3.8'
 impyla==0.18.0
 infi.clickhouse-orm==2.1.3
 iso8601==2.1.0; python_version >= '3.7' and python_version < '4.0'
@@ -52,7 +51,6 @@ jinja2==3.1.4; python_version >= '3.7'
 jmespath==1.0.1; python_version >= '3.7'
 kiwisolver==1.4.7; python_version >= '3.8'
 leb128==1.0.8
-lunarcalendar==0.0.9; python_version >= '2.7' and python_version < '4'
 lz4==4.3.3; python_version >= '3.8'
 markupsafe==2.1.5; python_version >= '3.7'
 matplotlib==3.9.2; python_version >= '3.9'
@@ -64,7 +62,7 @@ openpyxl==3.1.2; python_version >= '3.6'
 packaging==24.1; python_version >= '3.8'
 pandas[performance]==2.0.3; python_version >= '3.8'
 pillow==10.2.0; python_version >= '3.8'
-prophet==1.1.1; python_version >= '3.7'
+prophet==1.1.5; python_version >= '3.7'
 proto-plus==1.24.0; python_version >= '3.7'
 protobuf==5.28.2; python_version >= '3.8'
 psycopg2==2.9.7; python_version >= '3.6'
@@ -76,7 +74,6 @@ pycparser==2.22; python_version >= '3.8'
 pydruid==0.6.5
 pyhive==0.7.0
 pyldap==3.0.0
-pymeeus==0.5.12
 pyparsing==3.1.4; python_full_version >= '3.6.8'
 python-dateutil==2.9.0.post0; python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3'
 python-ldap==3.4.4; python_version >= '3.6'
@@ -85,9 +82,7 @@ requests==2.32.3; python_version >= '3.8'
 requests-oauthlib==1.1.0
 rsa==4.9; python_version >= '3.6' and python_version < '4'
 s3transfer==0.10.2; python_version >= '3.8'
-sasl==0.3.1
 setuptools==75.1.0; python_version >= '3.8'
-setuptools-git==1.2
 six==1.16.0; python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3'
 sqlalchemy==1.4.54; python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3, 3.4, 3.5'
 sqlalchemy-bigquery==1.8.0; python_version < '3.12' and python_version >= '3.7'
@@ -103,7 +98,6 @@ tzdata==2024.2; python_version >= '2'
 tzlocal==5.2; python_version >= '3.8'
 urllib3[socks]==2.0.7; python_version >= '3.7'
 werkzeug==3.0.4; python_version >= '3.8'
-wheel==0.44.0; python_version >= '3.8'
 zope.event==5.0; python_version >= '3.7'
 zope.interface==7.0.3; python_version >= '3.8'
 zstd==1.5.5.1
@@ -152,7 +146,6 @@ h11==0.14.0; python_version >= '3.7'
 hashids==1.3.1; python_version >= '2.7'
 humanize==4.10.0; python_version >= '3.8'
 importlib-metadata==8.5.0; python_version >= '3.8'
-importlib-resources==6.4.5; python_version >= '3.8'
 isodate==0.6.1
 jsonschema==4.23.0; python_version >= '3.8'
 jsonschema-specifications==2023.12.1; python_version >= '3.8'
