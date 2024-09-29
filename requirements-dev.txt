@@ -134,7 +134,7 @@ deprecation==2.1.0
 dnspython==2.6.1; python_version >= '3.8'
 email-validator==2.2.0; python_version >= '3.8'
 exceptiongroup==1.2.2; python_version < '3.11'
-flask-appbuilder==4.5.0; python_version ~= '3.7'
+flask-appbuilder==4.5.1; python_version ~= '3.7'
 flask-babel==2.0.0
 flask-caching==2.3.0; python_version >= '3.8'
 flask-compress==1.15
