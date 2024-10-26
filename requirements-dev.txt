@@ -97,7 +97,7 @@ trino[sqlalchemy]==0.330.0; python_version >= '3.8'
 tzdata==2024.2; python_version >= '2'
 tzlocal==5.2; python_version >= '3.8'
 urllib3[socks]==2.0.7; python_version >= '3.7'
-werkzeug==3.0.4; python_version >= '3.8'
+werkzeug==3.0.6; python_version >= '3.8'
 zope.event==5.0; python_version >= '3.7'
 zope.interface==7.0.3; python_version >= '3.8'
 zstd==1.5.5.1
