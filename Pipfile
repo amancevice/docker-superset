@@ -4,7 +4,7 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-apache-superset = "==4.1.0"
+apache-superset = "==4.1.1"
 urllib3 = "==2.2.2"
 
 [dev-packages]
