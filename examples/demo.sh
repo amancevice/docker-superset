@@ -1,39 +1,35 @@
-#!/bin/bash
+#!/bin/bash -e
 
-set -e
+stderr() { printf "$(tput setaf $1)$2$(tput sgr0)" "${*:3}" >&2 ; }
+execho() { stderr 240 "%s\n" "$*" ; eval "$@" ; }
 
 case $1 in
-  celery | mysql | postgres | sqlite) ;;
-  *) echo "Usage: ./demo.sh mysql|postgres|sqlite|celery" ; exit 1 ;;
+	celery | mysql | postgres | sqlite) ;;
+	*) echo "Usage: ./demo.sh mysql|postgres|sqlite|celery" ; exit 1 ;;
 esac
 
 cd $1
 
 # Start back end
 if [ "$1" == "sqlite" ]; then
-  echo "Starting redis service..."
-  docker compose up -d redis
+	execho docker compose up -d redis
 else
-  echo "Starting db & redis services..."
-  docker compose up -d db redis
-  echo "Sleeping for 10s"
-  sleep 10
+	execho docker compose up -d db redis
+	execho sleep 10
 fi
 
 # Start Superset
-echo "Starting Superset..."
-docker compose up -d superset
-if [ "$1" == "celery" ]; then
-  echo "Starting Superset worker..."
-  docker compose up -d worker
+execho docker compose up -d superset
+if [ "$1" == 'celery' ]; then
+	execho docker compose up -d worker
 fi
-echo "Sleeping for 10s"
-sleep 10
+execho sleep 10
 
 # Inititalize Demo
-docker compose exec superset superset-demo
+execho docker compose exec superset superset-demo
 
-echo "Navigate to http://localhost:8088 to view demo"
-echo -n "Press RETURN to bring down demo"
-read down
-docker compose down -v
+# Show message
+stderr 6 "%s\n" 'Navigate to http://localhost:8088 to view demo'
+stderr 6 "%s " 'Press RETURN to bring down demo'
+read
+execho docker compose down -v
