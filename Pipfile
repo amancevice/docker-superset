@@ -4,7 +4,7 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-apache-superset = "==4.1.2"
+apache-superset = "==5.0.0"
 
 [dev-packages]
 "infi.clickhouse-orm" = "==2.1.3"
