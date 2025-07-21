@@ -5,6 +5,7 @@ name = "pypi"
 
 [packages]
 apache-superset = "==5.0.0"
+marshmallow = ">=3.0, <4"
 
 [dev-packages]
 "infi.clickhouse-orm" = "==2.1.3"
